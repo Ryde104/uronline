@@ -1,9 +1,11 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from "./components/banner";
 import Quotes from "./components/quotes";
 import { useState } from "react";
 // import style from "./text";
 import CQuote from "./models/Quote";
 import PleaseWait from "./components/PleaseWait";
+import './App.css';
 
 const substyle = {
   fontWeight: "bold",
@@ -64,280 +66,287 @@ const App = () => {
   }
 
   if (m_bShowPleaseWait)
-    return <PleaseWait Show={m_bShowPleaseWait}></PleaseWait>;
+    return <div className="container"><div className="row"><div className="col"><PleaseWait Show={m_bShowPleaseWait}></PleaseWait></div></div></div>
   else
     return (
-      <>
-        <>
-          <Banner headerText="United Robotics Quote Generator" />
-        </>
-        <>
-          <div className="row mb-2">
-            <div className="col-5 mt-2" style={substyle}>
-              Company Name
-            </div>
-            <div className="col-3 mt-2" style={substyle}>
-              <input
-                className="form-control"
-                value={m_strCompanyName}
-                onChange={(e) => setm_strCompanyName(e.target.value)}
-              ></input>
-            </div>
-            <div className="col-5 mt-2" style={substyle}>
-              Tooling Descripion
-            </div>
-            <div className="col-3 mt-2" style={substyle}>
-              <textarea
-                className="form-control "
-                value={m_strToolingDescription}
-                onChange={(e) => setm_strToolingDescription(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="col-5 mt-2" style={substyle}>
-              Tooling price
-            </div>
-            <div className="col-3 mt-2" style={substyle}>
-              <input
-                className="form-control"
-                type="number"
-                value={m_dToolingPrice}
-                onChange={(e) => setm_dToolingPrice(e.target.value)}
-              ></input>
-            </div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <Banner headerText="United Robotics Quote Generator" />
           </div>
-
-          {/* <SubText Text="Client Name" Text2="Tooling Descriptions" /> */}
-        </>
-        <>{/* <Box /> */}</>
-        {/* <Price Text3="Tooling Price" /> */}
-        {/* <List Text4="test"/>
-      <List Text4="test2"/> */}
-
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">qty</th>
-              <th scope="col">Product</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nABBIRB4600qty}
-                  onChange={(e) => setm_nABBIRB4600qty(e.target.value)}
-                />
-              </th>
-              <td>ABBIRB4600-20kg2.5-meterroboticweldingarm</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nIRBP1000qty}
-                  onChange={(e) => setm_nIRBP1000qty(e.target.value)}
-                />
-              </th>
-              <td>IRB-P1000Lheadtailstockpositioners</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nABBBullsEyeqty}
-                  onChange={(e) => setm_nABBBullsEyeqty(e.target.value)}
-                />
-              </th>
-              <td>ABB BullsEye tool alignment station</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nAbicorBinzelqty}
-                  onChange={(e) => setm_nAbicorBinzelqty(e.target.value)}
-                />
-              </th>
-              <td>Abicor Binzel TCS-PP torch cleaning station</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nFroniusTPSi400qty}
-                  onChange={(e) => setm_nFroniusTPSi400qty(e.target.value)}
-                />
-              </th>
-              <td>
-                Fronius TPSi 400 water cooled welding power source with PMC{" "}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nKeyencesafetyareascannersqty}
-                  onChange={(e) =>
-                    setm_nKeyencesafetyareascannersqty(e.target.value)
-                  }
-                />
-              </th>
-              <td>Keyence safety area scanners</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nMinitecfencingsystemqty}
-                  onChange={(e) =>
-                    setm_nMinitecfencingsystemqty(e.target.value)
-                  }
-                />
-              </th>
-              <td>
-                Minitec fencing system with interlocked door and pop up flash
-                screens
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nPushbuttonoperatorpanelsqty}
-                  onChange={(e) =>
-                    setm_nPushbuttonoperatorpanelsqty(e.target.value)
-                  }
-                />
-              </th>
-              <td>Push button operator panels</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_ncablecoversqty}
-                  onChange={(e) => setm_ncablecoversqty(e.target.value)}
-                />
-              </th>
-              <td>Set of cable covers, robot riser, and floor plates</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nDigitalgasflowmeterqty}
-                  onChange={(e) => setm_nDigitalgasflowmeterqty(e.target.value)}
-                />
-              </th>
-              <td>Digital gas flow meter </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nFroniusConsumablesqty}
-                  onChange={(e) => setm_nFroniusConsumablesqty(e.target.value)}
-                />
-              </th>
-              <td>
-                Fronius Consumables- tips, nozzles, spatter guards, diffusers,
-                liner, and coolant
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nWirewizardconduitqty}
-                  onChange={(e) => setm_nWirewizardconduitqty(e.target.value)}
-                />
-              </th>
-              <td>Wire wizard conduit, fittings, and barrel cover</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nPendantarmorqty}
-                  onChange={(e) => setm_nPendantarmorqty(e.target.value)}
-                />
-              </th>
-              <td>Pendant armor cover for teach pendant </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nRemoteaccessmoduleqty}
-                  onChange={(e) => setm_nRemoteaccessmoduleqty(e.target.value)}
-                />
-              </th>
-              <td>Remote access module </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nElectrodetouchsenseqty}
-                  onChange={(e) => setm_nElectrodetouchsenseqty(e.target.value)}
-                />
-              </th>
-              <td>Electrode touch sense </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input
-                  type="number"
-                  className=" "
-                  value={m_nSafetyPLCqty}
-                  onChange={(e) => setm_nSafetyPLCqty(e.target.value)}
-                />
-              </th>
-              <td>Safety PLC, electronic position switch</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <>
+        </div>
+        <div className="row">
+          <div className="col-2">
+            <b>Company Name</b>
+          </div>
+          <div className="col">
+            <input
+              className="form-control"
+              value={m_strCompanyName}
+              onChange={(e) => setm_strCompanyName(e.target.value)}
+            ></input>
+          </div>
+        </div>
+        <div className="row"><div className="col-2">&nbsp;</div></div>
+        <div className="row">
+          <div className="col-2">
+            <b>Tooling Description</b>
+          </div>
+          <div className="col">
+            <textarea
+              className="form-control "
+              value={m_strToolingDescription}
+              onChange={(e) => setm_strToolingDescription(e.target.value)}
+            ></textarea>
+          </div>
+        </div>
+        <div className="row"><div className="col-2">&nbsp;</div></div>
+        <div className="row">
+          <div className="col-2">
+            <b>Tooling Price</b>
+          </div>
+          <div className="col">
+            <input
+              className="form-control"
+              type="number"
+              value={m_dToolingPrice}
+              onChange={(e) => setm_dToolingPrice(e.target.value)}
+            ></input>
+          </div>
+        </div>
+        <div className="row"><div className="col-2">&nbsp;</div></div>
+        <div className="row">
+          <div className="col-2">
+            <b>Options</b>
+          </div>
+          <div className="col">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">qty</th>
+                  <th scope="col">Product</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nABBIRB4600qty}
+                      onChange={(e) => setm_nABBIRB4600qty(e.target.value)}
+                    />
+                  </th>
+                  <td>ABBIRB4600-20kg2.5-meterroboticweldingarm</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nIRBP1000qty}
+                      onChange={(e) => setm_nIRBP1000qty(e.target.value)}
+                    />
+                  </th>
+                  <td>IRB-P1000Lheadtailstockpositioners</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nABBBullsEyeqty}
+                      onChange={(e) => setm_nABBBullsEyeqty(e.target.value)}
+                    />
+                  </th>
+                  <td>ABB BullsEye tool alignment station</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nAbicorBinzelqty}
+                      onChange={(e) => setm_nAbicorBinzelqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Abicor Binzel TCS-PP torch cleaning station</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nFroniusTPSi400qty}
+                      onChange={(e) => setm_nFroniusTPSi400qty(e.target.value)}
+                    />
+                  </th>
+                  <td>
+                    Fronius TPSi 400 water cooled welding power source with PMC{" "}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nKeyencesafetyareascannersqty}
+                      onChange={(e) =>
+                        setm_nKeyencesafetyareascannersqty(e.target.value)
+                      }
+                    />
+                  </th>
+                  <td>Keyence safety area scanners</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nMinitecfencingsystemqty}
+                      onChange={(e) =>
+                        setm_nMinitecfencingsystemqty(e.target.value)
+                      }
+                    />
+                  </th>
+                  <td>
+                    Minitec fencing system with interlocked door and pop up flash
+                    screens
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nPushbuttonoperatorpanelsqty}
+                      onChange={(e) =>
+                        setm_nPushbuttonoperatorpanelsqty(e.target.value)
+                      }
+                    />
+                  </th>
+                  <td>Push button operator panels</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_ncablecoversqty}
+                      onChange={(e) => setm_ncablecoversqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Set of cable covers, robot riser, and floor plates</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nDigitalgasflowmeterqty}
+                      onChange={(e) => setm_nDigitalgasflowmeterqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Digital gas flow meter </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nFroniusConsumablesqty}
+                      onChange={(e) => setm_nFroniusConsumablesqty(e.target.value)}
+                    />
+                  </th>
+                  <td>
+                    Fronius Consumables- tips, nozzles, spatter guards, diffusers,
+                    liner, and coolant
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nWirewizardconduitqty}
+                      onChange={(e) => setm_nWirewizardconduitqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Wire wizard conduit, fittings, and barrel cover</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nPendantarmorqty}
+                      onChange={(e) => setm_nPendantarmorqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Pendant armor cover for teach pendant </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nRemoteaccessmoduleqty}
+                      onChange={(e) => setm_nRemoteaccessmoduleqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Remote access module </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nElectrodetouchsenseqty}
+                      onChange={(e) => setm_nElectrodetouchsenseqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Electrode touch sense </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <input
+                      type="number"
+                      className=" "
+                      value={m_nSafetyPLCqty}
+                      onChange={(e) => setm_nSafetyPLCqty(e.target.value)}
+                    />
+                  </th>
+                  <td>Safety PLC, electronic position switch</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="row"><div className="col-2">&nbsp;</div></div>
+        <div className="row">
+          <div className="col-2">
+          </div>
+          <div className="col">
           <button
             onClick={() => Process()}
             className="btn btn-success buttonwidth"
           >
             Generate
           </button>
-          {/* <Button /> */}
-        </>
-        <Quotes />
 
-        {/* <pre>
-        <code>{JSON.stringify(m_strCompanyName, null, 4)}</code>
-      </pre>
-      <pre>
-        <code>{JSON.stringify(m_strToolingDescription, null, 4)}</code>
-      </pre>
-      <pre>
-        <code>{JSON.stringify(m_dToolingPrice, null, 4)}</code>
-      </pre>
-      <pre>
-        <code>{JSON.stringify(m_nSafetyPLCqty, null, 4)}</code>
-      </pre> */}
-      </>
+          </div>
+        </div>
+        <div className="row"><div className="col-2">&nbsp;</div></div>
+        <div className="row">
+          <div className="col">
+            <Quotes></Quotes>
+          </div>
+         
+        </div>
+
+
+      </div>
     );
 };
 export default App;
