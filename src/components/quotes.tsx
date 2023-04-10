@@ -10,7 +10,7 @@ const Quotes = (props: any) => {
 
   useEffect(() => {
     fetch(
-      "https://uro.azurewebsites.net/api/Quotes?code=cCq67dTb1obejl3uc8r0trwykXBDZvr5bzbI0qXqw2sbAzFuY1Oylg=="
+      "https://urobackend.azurewebsites.net/api/Quotes?code=-ThfzZ4qNiW_K79o7gBpCLo18Z3yrrm2gOb8GQqlIhX7AzFuLj6YbA=="
     )
       .then((res) => res.json())
       .then((res) => {
