@@ -6,6 +6,7 @@ import { useState } from "react";
 import CQuote from "./models/Quote";
 import PleaseWait from "./components/PleaseWait";
 import './App.css';
+import CProduct from './models/Product';
 
 const substyle = {
   fontWeight: "bold",
@@ -18,7 +19,7 @@ const App = () => {
   const [m_strToolingDescription, setm_strToolingDescription] = useState("");
   const [m_dToolingPrice, setm_dToolingPrice] = useState("");
 
-  const [m_nABBIRB4600qty, setm_nABBIRB4600qty] = useState("");
+  const [m_nABBIRB4600qty, setm_nABBIRB4600qty] = useState(0);
   const [m_nIRBP1000qty, setm_nIRBP1000qty] = useState("");
   const [m_nABBBullsEyeqty, setm_nABBBullsEyeqty] = useState("");
   const [m_nAbicorBinzelqty, setm_nAbicorBinzelqty] = useState("");
@@ -46,11 +47,19 @@ const App = () => {
     let v: CQuote = new CQuote();
     v.companyName = m_strCompanyName;
     v.objectPrice = parseFloat(m_dToolingPrice);
-    v.products = [];
+
+    if (m_nABBIRB4600qty > 0) {
+      let cp: CProduct = new CProduct();
+      cp.name = "ABBIRB4600";
+      cp.quantity = m_nABBIRB4600qty;
+      v.products.push(cp);
+    }
+
     setm_bShowPleaseWait(true);
 
     fetch(
       "https://urobackend.azurewebsites.net/api/Generate?code=Zn_l26D_4pmfQeWaIgYVFs-99Uqp_dyT1fvb0kBtxzs_AzFuQfvWYA==",
+      //"http://localhost:7210/api/Generate",
       {
         //fetch("http://localhost:7210/api/Generate", {
         method: "post",
@@ -135,7 +144,7 @@ const App = () => {
                       type="number"
                       className=" "
                       value={m_nABBIRB4600qty}
-                      onChange={(e) => setm_nABBIRB4600qty(e.target.value)}
+                      onChange={(e) => setm_nABBIRB4600qty(Number(e.target.value))}
                     />
                   </th>
                   <td>ABBIRB4600-20kg2.5-meterroboticweldingarm</td>
@@ -328,12 +337,12 @@ const App = () => {
           <div className="col-2">
           </div>
           <div className="col">
-          <button
-            onClick={() => Process()}
-            className="btn btn-success buttonwidth"
-          >
-            Generate
-          </button>
+            <button
+              onClick={() => Process()}
+              className="btn btn-success buttonwidth"
+            >
+              Generate
+            </button>
 
           </div>
         </div>
@@ -342,7 +351,7 @@ const App = () => {
           <div className="col">
             <Quotes></Quotes>
           </div>
-         
+
         </div>
 
 

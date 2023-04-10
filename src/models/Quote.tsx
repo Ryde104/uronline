@@ -1,3 +1,5 @@
+import CProduct from "./Product";
+
 class CQuote {
     companyName:string;
     objectDesc:string;
@@ -5,7 +7,7 @@ class CQuote {
 
     name:string;
     url: string;
-    products: []
+    products: CProduct[]
 
     constructor() {
       this.companyName = "";
