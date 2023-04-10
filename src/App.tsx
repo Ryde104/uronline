@@ -50,7 +50,7 @@ const App = () => {
     setm_bShowPleaseWait(true);
 
     fetch(
-      "https://uro.azurewebsites.net/api/Generate?code=xZAU_AK3AP7lyvzGO41ClqkaMUP-z1pwN9OnPmG7VJgHAzFuGtGlaA==",
+      "https://urobackend.azurewebsites.net/api/Generate?code=Zn_l26D_4pmfQeWaIgYVFs-99Uqp_dyT1fvb0kBtxzs_AzFuQfvWYA==",
       {
         //fetch("http://localhost:7210/api/Generate", {
         method: "post",
