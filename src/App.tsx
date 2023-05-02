@@ -41,6 +41,16 @@ const App = () => {
 
   const [m_bShowPleaseWait, setm_bShowPleaseWait] = useState(false);
 
+  function Preset() {
+    setm_nABBIRB4600qty(1);
+    setm_nIRBP1000qty(1);
+    setm_nABBBullsEyeqty(3);
+    setm_nFroniusTPSi400qty(1);
+    setm_nMinitecfencingsystemqty(2);
+    setm_nDigitalgasflowmeterqty(7);
+    setm_nSafetyPLCqty(2);
+  }
+
   function Process() {
     let v: CQuote = new CQuote();
     v.companyName = m_strCompanyName;
@@ -143,6 +153,7 @@ const App = () => {
       cp.quantity = m_nSafetyPLCqty;
       v.products.push(cp);
     }
+    function Preset() {}
 
     setm_bShowPleaseWait(true);
 
@@ -475,6 +486,12 @@ const App = () => {
               className="btn btn-success buttonwidth "
             >
               Generate
+            </button>
+            <button
+              onClick={() => Preset()}
+              className="btn btn-success buttonwidth "
+            >
+              Preset 1
             </button>
           </div>
         </div>
