@@ -11,6 +11,7 @@ const Quotes = (props: any) => {
   useEffect(() => {
     fetch(
       "https://urobackend.azurewebsites.net/api/Quotes?code=-ThfzZ4qNiW_K79o7gBpCLo18Z3yrrm2gOb8GQqlIhX7AzFuLj6YbA=="
+      //"http://localhost:7210/api/Quotes"
     )
       .then((res) => res.json())
       .then((res) => {
@@ -22,7 +23,8 @@ const Quotes = (props: any) => {
   function RenderItems() {
     return m_cQuotes.quotes.map((v: CQuote) => (
       <tr key={v.name}>
-        <a href={v.url}>{v.name}</a>
+        <td><a href={v.url}>{v.name}</a></td>
+        <td>{v.createdDate}</td>
       </tr>
     ));
   }
@@ -36,6 +38,7 @@ const Quotes = (props: any) => {
           <thead>
             <tr>
               <th scope="col">Quotes </th>
+              <th scope="col">Created Date </th>
             </tr>
           </thead>
           <tbody>{RenderItems()}</tbody>

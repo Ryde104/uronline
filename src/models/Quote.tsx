@@ -4,6 +4,7 @@ class CQuote {
     companyName:string;
     objectDesc:string;
     objectPrice:number;
+    createdDate:string;
 
     name:string;
     url: string;
@@ -16,6 +17,7 @@ class CQuote {
       this.name = "";
       this.url = "";
       this.products = [];
+      this.createdDate = "";
     }
   }
 
