@@ -1,12 +1,11 @@
 import CQuote from "./Quote";
 
 class CQuotes {
-    quotes:CQuote[];
-    
-    
-    constructor() {
-      this.quotes = [];
-    }
-  }
+  quotes: CQuote[];
 
-  export default CQuotes
+  constructor() {
+    this.quotes = [];
+  }
+}
+
+export default CQuotes;
