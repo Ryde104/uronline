@@ -6,6 +6,7 @@ import PageOne from "./PageOne";
 import PageZero from "./PageZero";
 import PageTwo from "./PageTwo";
 import PageThree from "./PageThree";
+import PageFour from "./PageFour";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -17,6 +18,8 @@ const Home = () => {
   const [m_nPositionerQty, setm_nPositionerQty] = useState(0);
 
   const [m_strBrand, setm_strBrand] = useState("");
+  const [m_strDesc, setm_strDesc] = useState("");
+  const [m_nWelderQty, setm_nWelderQty] = useState(0);
 
   function Backward() {
     if (m_nPage == 0) return;
@@ -46,7 +49,18 @@ const Home = () => {
           PositionerValueQty={m_nPositionerQty}
         ></PageTwo>
       );
-    else if (m_nPage == 3) return <PageThree></PageThree>;
+    else if (m_nPage == 3)
+      return (
+        <PageThree
+          Brand={setm_strBrand}
+          Description={setm_strDesc}
+          WelderPrice={setm_nWelderQty}
+          BrandValue={m_strBrand}
+          DescriptionValue={m_strDesc}
+          WelderValue={m_nWelderQty}
+        ></PageThree>
+      );
+    else if (m_nPage == 4) return <PageFour></PageFour>;
   }
 
   function Debug() {
@@ -66,6 +80,16 @@ const Home = () => {
         {m_strPositioner}
         <br></br>
         {m_nPositionerQty}
+        <br></br>
+        {m_strBrand}
+        <br></br>
+        {m_strDesc}
+        <br></br>
+        {m_nWelderQty}
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     );
   }
