@@ -49,7 +49,7 @@ const Two = (props: any) => {
         <option>IRBP R-600/1200</option>
         <option>IRBP R-1000/1200 </option>
       </select>
-      <h4>
+      <h5>
         <div className="row mt-3">
           <div className="col-1">Price: $</div>
           <div className="col ">
@@ -61,7 +61,7 @@ const Two = (props: any) => {
             ></input>
           </div>
         </div>
-      </h4>
+      </h5>
     </div>
   );
 };

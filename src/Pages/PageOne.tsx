@@ -87,7 +87,7 @@ const One = (props: any) => {
         <option>IRB 7600-150/3.5</option>
         <option>IRB 8700</option>
       </select>
-      <h4>
+      <h5>
         <div className="row mt-3">
           <div className="col-1">Price: $</div>
           <div className="col ">
@@ -99,7 +99,7 @@ const One = (props: any) => {
             ></input>
           </div>
         </div>
-      </h4>
+      </h5>
     </div>
   );
 };
