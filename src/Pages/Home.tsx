@@ -96,7 +96,7 @@ const Home = () => {
   }
 
   function Debug() {
-    // return;
+    return;
     return (
       <div>
         <br></br>
