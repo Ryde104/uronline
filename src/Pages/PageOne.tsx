@@ -89,7 +89,7 @@ const One = (props: any) => {
       </select>
       <h5>
         <div className="row mt-3">
-          <div className="col-1">Price: $</div>
+          <div className="col-1 mt-1">Price: $</div>
           <div className="col ">
             <input
               type="number"
