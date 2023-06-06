@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import Banner from "../components/banner";
 
 import PageOne from "./PageOne";
@@ -7,6 +7,7 @@ import PageZero from "./PageZero";
 import PageTwo from "./PageTwo";
 import PageThree from "./PageThree";
 import PageFour from "./PageFour";
+import PageFive from "./PageFive";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -21,13 +22,19 @@ const Home = () => {
   const [m_strDesc, setm_strDesc] = useState("");
   const [m_nWelderQty, setm_nWelderQty] = useState(0);
 
+  const [m_strTraining, setm_strTraining] = useState("");
+  const [m_strIntegration, setm_strIntegration] = useState("");
+  const [m_strProgramming, setm_strProgramming] = useState("");
+
   function Backward() {
     if (m_nPage == 0) return;
     setm_nPage(m_nPage - 1);
   }
   function Forward() {
+    if (m_nPage == 5) return;
     setm_nPage(m_nPage + 1);
   }
+  function Back() {}
 
   function RenderPage() {
     if (m_nPage == 0) return <PageZero />;
@@ -60,7 +67,32 @@ const Home = () => {
           WelderValue={m_nWelderQty}
         ></PageThree>
       );
-    else if (m_nPage == 4) return <PageFour></PageFour>;
+    else if (m_nPage == 4)
+      return (
+        <PageFour
+          Training={setm_strTraining}
+          Integration={setm_strIntegration}
+          Programming={setm_strProgramming}
+          TrainingValue={m_strTraining}
+          IntegrationValue={m_strIntegration}
+          ProgrammingValue={m_strProgramming}
+        ></PageFour>
+      );
+    else if (m_nPage == 5)
+      return (
+        <PageFive
+          Arm={m_strArm}
+          ArmPrice={m_nArmQty}
+          Positioners={m_strPositioner}
+          PositionerPrice={m_nPositionerQty}
+          Brand={m_strBrand}
+          Desc={m_strDesc}
+          WelderPrice={m_nWelderQty}
+          Training={m_strTraining}
+          Integration={m_strIntegration}
+          Programming={m_strProgramming}
+        />
+      );
   }
 
   function Debug() {
@@ -87,8 +119,11 @@ const Home = () => {
         <br></br>
         {m_nWelderQty}
         <br></br>
+        {m_strTraining}
         <br></br>
+        {m_strIntegration}
         <br></br>
+        {m_strProgramming}
         <br></br>
       </div>
     );

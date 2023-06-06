@@ -1,26 +1,14 @@
 const Four = (props: any) => {
   return (
     <div className="text-center col">
-      <h1>Options</h1>
+      <h1>Services</h1>
       <h4>
         <div className="row mt-3">
-          <div className="col-2">Brand:</div>
-          <div className="col ">
-            <input
-              value={props.m_strBrand}
-              onChange={(e) => props.m_strBrand(e.target.value)}
-              className="form-control"
-            ></input>
-          </div>
-        </div>
-      </h4>
-      <h4>
-        <div className="row mt-3">
-          <div className="col-2">Description:</div>
+          <div className="col-2">Training:</div>
           <div className="col ">
             <textarea
-              value={props.m_strBrand}
-              onChange={(e) => props.m_strBrand(e.target.value)}
+              value={props.TrainingValue}
+              onChange={(e) => props.Training(e.target.value)}
               className="form-control"
             ></textarea>
           </div>
@@ -28,27 +16,25 @@ const Four = (props: any) => {
       </h4>
       <h4>
         <div className="row mt-3">
-          <div className="col-2">Price: $</div>
+          <div className="col-2">Integration:</div>
           <div className="col ">
-            <input
-              value={props.m_strBrand}
-              onChange={(e) => props.m_strBrand(e.target.value)}
+            <textarea
+              value={props.IntegrationValue}
+              onChange={(e) => props.Integration(e.target.value)}
               className="form-control"
-              type="number"
-            ></input>
+            ></textarea>
           </div>
         </div>
       </h4>
       <h4>
         <div className="row mt-3">
-          <div className="col-2">Image: </div>
+          <div className="col-2">Programming:</div>
           <div className="col ">
-            <input
-              value={props.m_strBrand}
-              onChange={(e) => props.m_strBrand(e.target.value)}
+            <textarea
+              value={props.ProgrammingValue}
+              onChange={(e) => props.Programming(e.target.value)}
               className="form-control"
-              type="file"
-            ></input>
+            ></textarea>
           </div>
         </div>
       </h4>
