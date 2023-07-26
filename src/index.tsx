@@ -5,10 +5,10 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 
-import Home from "./Pages/Home";
+import Main from "./Pages/Main";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "./Pages/PageZero";
+
 import App from "./App";
 
 const root = ReactDOM.createRoot(
@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Home />
+    <Main />
   </React.StrictMode>
 );
 
