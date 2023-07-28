@@ -23,10 +23,10 @@ const Integration = (props: any) => {
           <div className="col-2">Price: $</div>
           <div className="col ">
             <input
+              type="number"
+              className="form-control"
               value={props.IntegrationPriceValue}
               onChange={(e) => props.IntegrationPrice(e.target.value)}
-              className="form-control"
-              type="number"
             ></input>
           </div>
         </div>

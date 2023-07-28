@@ -52,18 +52,18 @@ const TotalPage = (props: any) => {
           </tr>
           <tr>
             <th scope="row">Programming</th>
-            <td colSpan={2}>{props.Brand}</td>
-            <td>${props.WelderPrice}</td>
+            <td colSpan={2}>{props.Programming}</td>
+            <td>${props.ProgrammingPrice}</td>
           </tr>
           <tr>
             <th scope="row">Tooling</th>
-            <td colSpan={2}>{props.Brand}</td>
-            <td>${props.WelderPrice}</td>
+            <td colSpan={2}>{props.Tooling}</td>
+            <td>${props.ToolingPrice}</td>
           </tr>
           <tr>
-            <th scope="row">FAT&C</th>
-            <td colSpan={2}>{props.Brand}</td>
-            <td>${props.WelderPrice}</td>
+            <th scope="row">F.A.T.C</th>
+            <td colSpan={2}>{props.FATC}</td>
+            <td>${props.FATCPrice}</td>
           </tr>
         </tbody>
         <thead>
@@ -77,7 +77,7 @@ const TotalPage = (props: any) => {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Training</th>
+            <th scope="row">fIRST</th>
             <td colSpan={2}>{props.Arm}</td>
             <td>${props.ArmPrice}</td>
           </tr>

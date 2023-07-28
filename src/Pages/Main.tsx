@@ -30,17 +30,17 @@ const Home = () => {
   const [m_strTrainingValue, setm_strTraining] = useState("");
   const [m_nTrainingPriceValue, setm_nTrainingPrice] = useState(0);
 
-  const [m_strIntegration, setm_strIntegration] = useState("");
-  const [m_nIntegrationPrice, setm_nIntegrationPrice] = useState(0);
+  const [m_strIntegrationValue, setm_strIntegration] = useState("");
+  const [m_nIntegrationPriceValue, setm_nIntegrationPrice] = useState(0);
 
-  const [m_strProgramming, setm_strProgramming] = useState("");
-  const [m_nProgrammingPrice, setm_nProgrammingPrice] = useState(0);
+  const [m_strProgrammingValue, setm_strProgramming] = useState("");
+  const [m_nProgrammingPriceValue, setm_nProgrammingPrice] = useState(0);
 
-  const [m_strTooling, setm_strTooling] = useState("");
-  const [m_nToolingPrice, setm_nToolingPrice] = useState(0);
+  const [m_strToolingValue, setm_strTooling] = useState("");
+  const [m_nToolingPriceValue, setm_nToolingPrice] = useState(0);
 
-  const [m_strFATC, setm_strFATC] = useState("");
-  const [m_nFATCPrice, setm_nFATCPrice] = useState(0);
+  const [m_strFATCValue, setm_strFATC] = useState("");
+  const [m_nFATCPriceValue, setm_nFATCPrice] = useState(0);
 
   const [m_strOptions, setm_strOptions] = useState("");
   const [m_nOptionsPrice, setm_nOptionsPrice] = useState(0);
@@ -62,7 +62,6 @@ const Home = () => {
     if (m_nPage == 10) return;
     setm_nPage(m_nPage + 1);
   }
-  function Back() {}
 
   function RenderPage() {
     if (m_nPage == 0) return <HomePage />;
@@ -110,8 +109,8 @@ const Home = () => {
         <IntegrationPage
           Integration={setm_strIntegration}
           IntegrationPrice={setm_nIntegrationPrice}
-          IntegrationValue={m_strIntegration}
-          IntegrationPriceValue={m_nIntegrationPrice}
+          IntegrationValue={m_strIntegrationValue}
+          IntegrationPriceValue={m_nIntegrationPriceValue}
         ></IntegrationPage>
       );
     else if (m_nPage == 6)
@@ -119,8 +118,8 @@ const Home = () => {
         <ProgrammingPage
           Programming={setm_strProgramming}
           ProgrammingPrice={setm_nProgrammingPrice}
-          ProgrammingValue={m_strProgramming}
-          ProgrammingPriceValue={m_nProgrammingPrice}
+          ProgrammingValue={m_strProgrammingValue}
+          ProgrammingPriceValue={m_nProgrammingPriceValue}
         ></ProgrammingPage>
       );
     else if (m_nPage == 7)
@@ -128,8 +127,8 @@ const Home = () => {
         <ToolingPage
           Tooling={setm_strTooling}
           ToolingPrice={setm_nToolingPrice}
-          ToolingValue={m_strTooling}
-          ToolingPriceValue={m_nToolingPrice}
+          ToolingValue={m_strToolingValue}
+          ToolingPriceValue={m_nToolingPriceValue}
         ></ToolingPage>
       );
     else if (m_nPage == 8)
@@ -137,8 +136,8 @@ const Home = () => {
         <FATCPage
           FATC={setm_strFATC}
           FATCPrice={setm_nFATCPrice}
-          FATCValue={m_strFATC}
-          FATCPriceValue={m_nFATCPrice}
+          FATCValue={m_strFATCValue}
+          FATCPriceValue={m_nFATCPriceValue}
         ></FATCPage>
       );
     else if (m_nPage == 9)
@@ -164,9 +163,17 @@ const Home = () => {
           Training={m_strTrainingValue}
           TrainingPrice={m_nTrainingPriceValue}
           //
-          Integration={m_strIntegration}
+          Integration={m_strIntegrationValue}
+          IntegrationPrice={m_nIntegrationPriceValue}
           //
-          Programming={m_strProgramming}
+          Programming={m_strProgrammingValue}
+          ProgrammingPrice={m_nProgrammingPriceValue}
+          //
+          Tooling={m_strToolingValue}
+          ToolingPrice={m_nToolingPriceValue}
+          //
+          FATC={m_strFATCValue}
+          FATCPrice={m_nFATCPriceValue}
         ></TotalPage>
       );
   }
@@ -196,9 +203,9 @@ const Home = () => {
         <br></br>
         {m_strTrainingValue}
         <br></br>
-        {m_strIntegration}
+        {m_strIntegrationValue}
         <br></br>
-        {m_strProgramming}
+        {m_strProgrammingValue}
         <br></br>
       </div>
     );
@@ -221,7 +228,7 @@ const Home = () => {
         Next
       </button>
 
-      {Debug()}
+      {/* {Debug()} */}
     </div>
   );
 };
