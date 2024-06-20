@@ -81,6 +81,51 @@ const TotalPage = (props: any) => {
             <td colSpan={2}>{props.Arm}</td>
             <td>${props.ArmPrice}</td>
           </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
+          <tr>
+            <th scope="row">fIRST</th>
+            <td colSpan={2}>{props.Arm}</td>
+            <td>${props.ArmPrice}</td>
+          </tr>
         </tbody>
       </table>
     </>

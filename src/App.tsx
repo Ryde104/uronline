@@ -483,7 +483,7 @@ const App = () => {
           <div className="col">
             <button
               onClick={() => Process()}
-              className="btn btn-success buttonwidth "
+              className="btn btn-success buttonwidth  mt={5}"
             >
               Generate
             </button>

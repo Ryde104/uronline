@@ -1,4 +1,5 @@
 import react, { useState } from "react";
+import "../App.css";
 
 import Banner from "../components/banner";
 
@@ -13,6 +14,8 @@ import ToolingPage from "./ToolingPage";
 import FATCPage from "./FATCPage";
 import OptionsPage from "./OptionsPage";
 import TotalPage from "./TotalPage";
+import EndPricePage from "./EndPricePage";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -59,7 +62,7 @@ const Home = () => {
     setm_nPage(m_nPage - 1);
   }
   function Forward() {
-    if (m_nPage == 10) return;
+    if (m_nPage == 11) return;
     setm_nPage(m_nPage + 1);
   }
 
@@ -176,6 +179,7 @@ const Home = () => {
           FATCPrice={m_nFATCPriceValue}
         ></TotalPage>
       );
+    else if (m_nPage == 11) return <EndPricePage></EndPricePage>;
   }
 
   function Debug() {
@@ -211,25 +215,27 @@ const Home = () => {
     );
   }
   return (
-    <div className="container ">
-      <div className="col"></div>
-      <Banner headerText="United Robotics Quote Generator" />
-      {RenderPage()}
-      <button
-        onClick={() => Backward()}
-        className="btn btn-danger btn-lg position-absolute bottom-0 start-0 col-2 mb-4 mx-4"
-      >
-        Back
-      </button>
-      <button
-        onClick={() => Forward()}
-        className="btn btn-primary btn-lg position-absolute bottom-0 end-0 col-2 mb-4 mx-4"
-      >
-        Next
-      </button>
+    <ChakraProvider>
+      <div className="container ">
+        <div className="col"></div>
+        <Banner headerText="United Robotics Quote Generator" />
+        {RenderPage()}
+        <button
+          onClick={() => Backward()}
+          className="btn btn-danger btn-lg  col-2 mt-2 mb-2"
+        >
+          Back
+        </button>
+        <button
+          onClick={() => Forward()}
+          className="btn btn-primary btn-lg col-2 mt-2 mx-2 mb-2"
+        >
+          Next
+        </button>
 
-      {/* {Debug()} */}
-    </div>
+        {Debug()}
+      </div>
+    </ChakraProvider>
   );
 };
 
