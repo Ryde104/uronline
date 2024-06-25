@@ -3,7 +3,7 @@ import "../App.css";
 
 import Banner from "../components/banner";
 
-import ArmsPage from "./ArmsPage";
+import InfoPage from "./InfoPage";
 import HomePage from "./HomePage";
 import PositionersPage from "./PositionersPage";
 import WeldersPage from "./WeldersPage";
@@ -16,6 +16,8 @@ import OptionsPage from "./OptionsPage";
 import TotalPage from "./TotalPage";
 import EndPricePage from "./EndPricePage";
 import { ChakraProvider } from "@chakra-ui/react";
+import ArmsPage from "./ArmsPage";
+import DesignPage from "./DesignPage";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -68,24 +70,13 @@ const Home = () => {
 
   function RenderPage() {
     if (m_nPage == 0) return <HomePage />;
-    else if (m_nPage == 1)
-      return (
-        <ArmsPage
-          ArmSelection={setm_strArm}
-          ArmPriceQty={setm_nArmQty}
-          // ^ make the box work ↓ make it keep value
-          ArmValue={m_strArm}
-          ArmValueQty={m_nArmQty}
-        ></ArmsPage>
-      );
+    else if (m_nPage == 1) return <InfoPage></InfoPage>;
     else if (m_nPage == 2)
       return (
-        <PositionersPage
-          PositionerSelection={setm_strPositioner}
-          PositionerPriceQty={setm_nPositionerQty}
-          PositionerValue={m_strPositioner}
-          PositionerValueQty={m_nPositionerQty}
-        ></PositionersPage>
+        <>
+          <DesignPage></DesignPage>
+          <ArmsPage></ArmsPage>
+        </>
       );
     else if (m_nPage == 3)
       return (
@@ -128,10 +119,10 @@ const Home = () => {
     else if (m_nPage == 7)
       return (
         <ToolingPage
-          Tooling={setm_strTooling}
-          ToolingPrice={setm_nToolingPrice}
-          ToolingValue={m_strToolingValue}
-          ToolingPriceValue={m_nToolingPriceValue}
+        //Tooling={setm_strTooling}
+        //ToolingPrice={setm_nToolingPrice}
+        //ToolingValue={m_strToolingValue}
+        //ToolingPriceValue={m_nToolingPriceValue}
         ></ToolingPage>
       );
     else if (m_nPage == 8)

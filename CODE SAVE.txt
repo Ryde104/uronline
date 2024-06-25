@@ -105,3 +105,22 @@ const One = (props: any) => {
 };
 
 export default One;
+
+
+ArmSelection={setm_strArm}
+          ArmPriceQty={setm_nArmQty}
+          // ^ make the box work ↓ make it keep value
+          ArmValue={m_strArm}
+          ArmValueQty={m_nArmQty}
+
+PositionerSelection={setm_strPositioner}
+          PositionerPriceQty={setm_nPositionerQty}
+          PositionerValue={m_strPositioner}
+          PositionerValueQty={m_nPositionerQty}
+
+<select
+        onChange={(e) => props.ArmSelection(e.target.value)}
+        value={props.ArmValue}
+        className="form-control col-5 mt-3"
+        id="inputGroupSelect01"
+      >

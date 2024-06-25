@@ -1,38 +1,50 @@
-import react from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Banner from "../components/banner";
+import React, { useState, ChangeEvent } from "react";
 
-const Programming = (props: any) => {
+interface InputGroup {
+  name: string;
+  age: string;
+}
+
+const Programming: React.FC = () => {
+  const [inputGroups, setInputGroups] = useState<InputGroup[]>([
+    { name: "", age: "" },
+  ]);
+
+  const addInputGroup = () => {
+    setInputGroups([...inputGroups, { name: "", age: "" }]);
+  };
+
+  const handleInputChange = (
+    index: number,
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const values = [...inputGroups];
+    const name = event.target.name as keyof InputGroup; // Assertion here
+    values[index][name] = event.target.value;
+    setInputGroups(values);
+  };
+
   return (
     <div>
-      <div className="text-center col">
-        <h1>Tooling</h1>
-      </div>
-      <h4>
-        <div className="row mt-3">
-          <div className="col-2">Description:</div>
-          <div className="col ">
-            <textarea
-              value={props.ToolingValue}
-              onChange={(e) => props.Tooling(e.target.value)}
-              className="form-control"
-            ></textarea>
-          </div>
+      {inputGroups.map((inputGroup, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            name="name"
+            value={inputGroup.name}
+            onChange={(event) => handleInputChange(index, event)}
+            placeholder="Name"
+          />
+          <input
+            type="number"
+            name="age"
+            value={inputGroup.age}
+            onChange={(event) => handleInputChange(index, event)}
+            placeholder="Age"
+          />
         </div>
-      </h4>
-      <h4>
-        <div className="row mt-3">
-          <div className="col-2">Price: $</div>
-          <div className="col ">
-            <input
-              value={props.ToolingPriceValue}
-              onChange={(e) => props.ToolingPrice(e.target.value)}
-              className="form-control"
-              type="number"
-            ></input>
-          </div>
-        </div>
-      </h4>
+      ))}
+      <button onClick={addInputGroup}>Add Input Group</button>
     </div>
   );
 };
