@@ -25,6 +25,7 @@ const One = (props: any) => {
       <Input placeholder="First Name" mt={2} mb={2} width="50" />
       <Input placeholder="Last Name" width="50" ml={2} />
       <Input placeholder="Company" width="50" ml={2} />
+      <Input placeholder="Quote Number" width="50" ml={2} />
       <Input
         placeholder="Date"
         width="50"

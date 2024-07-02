@@ -124,3 +124,14 @@ PositionerSelection={setm_strPositioner}
         className="form-control col-5 mt-3"
         id="inputGroupSelect01"
       >
+
+<InputGroup>
+        <InputLeftAddon>Preset Arms</InputLeftAddon>
+        <Select
+          variant="outline"
+          size="md"
+          onChange={(e) => props.ArmSelection(e.target.value)}
+          value={props.ArmValue}
+        />
+        <Input width="50" placeholder="Quantity" />
+      </InputGroup>

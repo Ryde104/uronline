@@ -14,17 +14,4 @@ const Zero = (props: any) => {
   );
 };
 
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "300px",
-    margin: "20px auto",
-  },
-  textbox: {
-    flex: "1",
-    margin: "0 10px",
-  },
-};
 export default Zero;
