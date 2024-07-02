@@ -22,10 +22,35 @@ const One = (props: any) => {
   return (
     <ChakraProvider resetCSS>
       <Heading mb={2}>Company Information</Heading>
-      <Input placeholder="First Name" mt={2} mb={2} width="50" />
-      <Input placeholder="Last Name" width="50" ml={2} />
-      <Input placeholder="Company" width="50" ml={2} />
-      <Input placeholder="Quote Number" width="50" ml={2} />
+      <Input
+        placeholder="First Name"
+        mt={2}
+        mb={2}
+        width="50"
+        value={props.FirstNameValue}
+        onChange={(e) => props.FirstName(e.target.value)}
+      />
+      <Input
+        placeholder="Last Name"
+        width="50"
+        ml={2}
+        value={props.LastNameValue}
+        onChange={(e) => props.LastName(e.target.value)}
+      />
+      <Input
+        placeholder="Company"
+        width="50"
+        ml={2}
+        value={props.CompanyValue}
+        onChange={(e) => props.Company(e.target.value)}
+      />
+      <Input
+        placeholder="Quote Number"
+        width="50"
+        ml={2}
+        value={props.QuoteNValue}
+        onChange={(e) => props.QuoteN(e.target.value)}
+      />
       <Input
         placeholder="Date"
         width="50"
@@ -34,7 +59,11 @@ const One = (props: any) => {
         value={currentDate}
         onChange={(e) => setCurrentDate(e.target.value)}
       />
-      <Input placeholder="Project Description" />
+      <Input
+        placeholder="Project Description"
+        value={props.ProjectDescValue}
+        onChange={(e) => props.ProjectDesc(e.target.value)}
+      />
     </ChakraProvider>
   );
 };

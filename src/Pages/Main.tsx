@@ -22,6 +22,14 @@ import DesignPage from "./DesignPage";
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
 
+  //Company info page
+  const [m_strFirstName, setm_strFirstName] = useState("");
+  const [m_strLastName, setm_strLastName] = useState("");
+  const [m_strCompany, setm_strCompany] = useState("");
+  const [m_strQuoteN, setm_strQuoteN] = useState("");
+  // //date?
+  const [m_strProjectDesc, setm_strProjectDesc] = useState("");
+
   const [m_strArm, setm_strArm] = useState("");
   const [m_nArmQty, setm_nArmQty] = useState(0);
 
@@ -70,12 +78,26 @@ const Home = () => {
 
   function RenderPage() {
     if (m_nPage == 0) return <HomePage />;
-    else if (m_nPage == 1) return <InfoPage></InfoPage>;
+    else if (m_nPage == 1)
+      return (
+        <InfoPage
+          FirstName={setm_strFirstName}
+          // ^ make the box work ↓ make it keep value
+          FirstNameValue={m_strFirstName}
+          LastName={setm_strLastName}
+          LastNameValue={m_strLastName}
+          Company={setm_strCompany}
+          CompanyValue={m_strCompany}
+          QuoteN={setm_strQuoteN}
+          QuoteNValue={m_strQuoteN}
+          ProjectDesc={setm_strProjectDesc}
+          ProjectDescValue={m_strProjectDesc}
+        ></InfoPage>
+      );
     else if (m_nPage == 2)
       return (
         <>
           <DesignPage></DesignPage>
-          <ArmsPage></ArmsPage>
         </>
       );
     else if (m_nPage == 3)
@@ -119,10 +141,8 @@ const Home = () => {
     else if (m_nPage == 7)
       return (
         <ToolingPage
-        //Tooling={setm_strTooling}
-        //ToolingPrice={setm_nToolingPrice}
-        //ToolingValue={m_strToolingValue}
-        //ToolingPriceValue={m_nToolingPriceValue}
+          ArmSelection={setm_strArm}
+          ArmValue={m_strArm}
         ></ToolingPage>
       );
     else if (m_nPage == 8)
