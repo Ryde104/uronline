@@ -1,94 +1,99 @@
-import { Heading, Divider, ChakraProvider, Input, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react";
-import React, { useState, ChangeEvent } from "react";
+import {
+  Heading,
+  ChakraProvider,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Select,
+  Button,
+  Box,
+  Flex,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 
-interface InputGroup {
-  name: string;
-  age: string;
+interface InputGroupProps {
+  arm: string;
+  quantity: string;
 }
 
-const Programming= (props: any) => {
-  const [inputGroups, setInputGroups] = useState<InputGroup[]>([
-    { name: "", age: "" },
+interface ProgrammingProps {
+  ArmValue: string;
+  ArmSelection: (value: string) => void;
+}
+
+const Programming: React.FC<ProgrammingProps> = (props) => {
+  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
+    { arm: "", quantity: "" },
   ]);
   const [m_nSelector, setm_nSelector] = useState(0);
 
   const addInputGroup = () => {
-    setInputGroups([...inputGroups, { name: "", age: "" }]);
+    setInputGroups([...inputGroups, { arm: "", quantity: "" }]);
     setm_nSelector(m_nSelector + 1);
   };
 
-  const handleInputChange = (
-    index: number,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const values = [...inputGroups];
-    const name = event.target.name as keyof InputGroup; // Assertion here
-    values[index][name] = event.target.value;
-    setInputGroups(values);
+  const removeInputGroup = (index: number) => {
+    const confirmRemove = window.confirm(
+      "Are you sure you want to remove this Arm?"
+    );
+    if (confirmRemove) {
+      const updatedGroups = [...inputGroups];
+      updatedGroups.splice(index, 1);
+      setInputGroups(updatedGroups);
+    }
   };
 
-  
+  const handleArmChange = (index: number, value: string) => {
+    const updatedGroups = [...inputGroups];
+    updatedGroups[index].arm = value;
+    setInputGroups(updatedGroups);
+  };
 
- 
+  const handleQuantityChange = (index: number, value: string) => {
+    const updatedGroups = [...inputGroups];
+    updatedGroups[index].quantity = value;
+    setInputGroups(updatedGroups);
+  };
 
-  if (m_nSelector == 0) return (
-    <div>
-      {inputGroups.map((inputGroup, index, prop) => (
+  return (
     <ChakraProvider resetCSS>
-      <Heading>Robot Arms</Heading>
-
-      <InputGroup>
-        <InputLeftAddon>Preset Arms</InputLeftAddon>
-        <Select
-          variant="outline"
-          size="md"
-          
-          value={props.ArmValue}
-          onChange={(e) => props.ArmSelection(e.target.value)}
-          
-        >
-         <option selected>Choose...</option>
-          <option>IRB 1010-1.5/0.37</option>
-
-        </Select>
-
-        <Input width="50" placeholder="Quantity" />
-      </InputGroup>
+      <Box p={4}>
+        <Heading mb={4}>Robot Arms</Heading>
+        {inputGroups.map((inputGroup, index) => (
+          <InputGroup key={index} mb={4}>
+            <InputLeftAddon>Preset Arms</InputLeftAddon>
+            <Select
+              variant="outline"
+              size="md"
+              value={inputGroup.arm}
+              onChange={(e) => handleArmChange(index, e.target.value)}
+            >
+              <option value="">Choose...</option>
+              <option value="IRB 1010-1.5/0.37">IRB 1010-1.5/0.37</option>
+            </Select>
+            <Input
+              width="100px"
+              placeholder="#"
+              value={inputGroup.quantity}
+              onChange={(e) => handleQuantityChange(index, e.target.value)}
+            />
+            <Button
+              ml={2}
+              colorScheme="red"
+              onClick={() => removeInputGroup(index)}
+            >
+              Remove
+            </Button>
+          </InputGroup>
+        ))}
+        <Flex justify="flex-end">
+          <Button onClick={addInputGroup} colorScheme="teal" width="50px">
+            Add
+          </Button>
+        </Flex>
+      </Box>
     </ChakraProvider>
-  ))}
-      <button onClick={addInputGroup} >Add Input Group</button>
-    </div>
   );
-  else if (m_nSelector == 2)
-    return (
-      <div>
-        {inputGroups.map((inputGroup, index, prop) => (
-      <ChakraProvider resetCSS>
-        <Heading>Robot Arms</Heading>
-  
-        <InputGroup>
-          <InputLeftAddon>Preset Arms</InputLeftAddon>
-          <Select
-            variant="outline"
-            size="md"
-            
-            value={props.ArmValue}
-            onChange={(e) => props.ArmSelection(e.target.value)}
-            
-          >
-           <option selected>Choose...</option>
-            <option>IRB 1010-1.5/0.37</option>
-  
-          </Select>
-  
-          <Input width="50" placeholder="Quantity" />
-        </InputGroup>
-      </ChakraProvider>
-    ))}
-        <button onClick={addInputGroup} >Add Input Group</button>
-      </div>
-    );
-  
 };
 
 export default Programming;
