@@ -10,7 +10,7 @@ import WeldersPage from "./WeldersPage";
 import TrainingPage from "./TrainingPage";
 import IntegrationPage from "./IntegrationPage";
 import ProgrammingPage from "./ProgrammingPage";
-import ToolingPage from "./ToolingPage";
+import ToolingPage from "./ToolingPage2";
 import FATCPage from "./FATCPage";
 import OptionsPage from "./OptionsPage";
 import TotalPage from "./TotalPage";
@@ -18,9 +18,14 @@ import EndPricePage from "./EndPricePage";
 import { ChakraProvider } from "@chakra-ui/react";
 import ArmsPage from "./ArmsPage";
 import DesignPage from "./DesignPage";
+import CRobotArm from "../classes/RobotArm";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
+
+
+  const [m_aRobotArm, setm_aRobotArm] = useState([]);
+  const [artists, setArtists] = useState([]);
 
   //Company info page
   const [m_strFirstName, setm_strFirstName] = useState("");
@@ -76,6 +81,36 @@ const Home = () => {
     setm_nPage(m_nPage + 1);
   }
 
+  function AddRobotArm() {
+    
+    //setm_aRobotArms
+    
+    // let vRobotArm:CRobotArm[]  = m_aRobotArms;
+
+    // let c: CRobotArm = new CRobotArm;
+    // c.description = "test";
+    // c.qty = 1;
+    // vRobotArm.push(c);
+
+    // alert("t");
+    // setm_aRobotArms([...m_aRobotArms, vRobotArm])
+
+
+
+    //set_array([...array, new_array]);
+    //setm_aRobotArms(m_aRobotArms => [...m_aRobotArms, newValue])
+    
+   
+    // setArtists( // Replace the state
+    //   [ // with a new array
+    //     ...artists, // that contains all the old items
+    //     {  name: "name" } // and one new item at the end
+    //   ]
+    // );
+
+
+  }
+
   function RenderPage() {
     if (m_nPage == 0) return <HomePage />;
     else if (m_nPage == 1)
@@ -95,10 +130,8 @@ const Home = () => {
             ProjectDescValue={m_strProjectDesc}
           ></InfoPage>
           <ToolingPage
-            ArmSelection1={setm_strArm}
-            ArmValue1={m_strArm}
-            ArmSelection2={setm_strArm}
-            ArmValue2={m_strArm}
+            m_aRobotArm={m_aRobotArm}
+            setm_aRobotArms={setm_aRobotArm}           
           ></ToolingPage>
         </>
       );
@@ -197,7 +230,7 @@ const Home = () => {
 
   function Debug() {
     return (
-      <div>
+      <div>m_aRobotArms: <pre>{JSON.stringify(m_aRobotArm)}</pre>
         <br></br>
         <br></br>
         <br></br>

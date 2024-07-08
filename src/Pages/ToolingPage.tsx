@@ -140,7 +140,7 @@ const Programming: React.FC<ProgrammingProps> = (props) => {
               </Button>
             </Flex>
           </Box>
-          {m_nSelector}
+          m_nSelector: {m_nSelector}
         </ChakraProvider>
       );
   }
