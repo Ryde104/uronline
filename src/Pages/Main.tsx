@@ -95,8 +95,10 @@ const Home = () => {
             ProjectDescValue={m_strProjectDesc}
           ></InfoPage>
           <ToolingPage
-            ArmSelection={setm_strArm}
-            ArmValue={m_strArm}
+            ArmSelection1={setm_strArm}
+            ArmValue1={m_strArm}
+            ArmSelection2={setm_strArm}
+            ArmValue2={m_strArm}
           ></ToolingPage>
         </>
       );
@@ -144,13 +146,7 @@ const Home = () => {
           ProgrammingPriceValue={m_nProgrammingPriceValue}
         ></ProgrammingPage>
       );
-    else if (m_nPage == 7)
-      return (
-        <ToolingPage
-          ArmSelection={setm_strArm}
-          ArmValue={m_strArm}
-        ></ToolingPage>
-      );
+    else if (m_nPage == 7) return <></>;
     else if (m_nPage == 8)
       return (
         <FATCPage
