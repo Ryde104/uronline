@@ -9,10 +9,10 @@ const titlestyle = {
 const Banner = (props: any) => {
   return (
     <header className="row mb-4 ">
-      <div className=" mt-2 col-7">
+      <div className=" mt-3 col-7">
         <img src="./logo.png" alt="logo" width={200} className="logo " />
       </div>
-      <div className="col-5 mt-5 " style={titlestyle}>
+      <div className="col-5 mt-4 " style={titlestyle}>
         {props.headerText}
       </div>
     </header>

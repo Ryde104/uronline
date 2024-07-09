@@ -243,3 +243,23 @@ return (
       </InputGroup>
     </ChakraProvider>
   ))}
+
+
+Preset arms box:
+<Select
+              variant="outline"
+              size="md"
+              value={v.description}
+              onChange={(e) =>
+                RobotArmSelection(
+                  getPosition(v, props.m_aRobotArm),
+                  e.target.value
+                )
+              }
+            >
+              <option value="">Choose...</option>
+              <option value="IRB 1010-1.5/0.37">IRB 1010-1.5/0.37</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </Select>

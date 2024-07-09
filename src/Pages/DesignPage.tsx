@@ -6,8 +6,8 @@ import { Divider, Heading } from "@chakra-ui/react";
 const Zero = (props: any) => {
   return (
     <>
-      <Heading mb={2}>Design</Heading>
-      <Heading as="h3" size="md">
+      <Heading mb={2} >Design</Heading>
+      <Heading as="h3" size="md" mb={6}>
         What are we building?
       </Heading>
       <Divider borderColor="black" />

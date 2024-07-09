@@ -10,19 +10,19 @@ import WeldersPage from "./WeldersPage";
 import TrainingPage from "./TrainingPage";
 import IntegrationPage from "./IntegrationPage";
 import ProgrammingPage from "./ProgrammingPage";
-import ToolingPage from "./ToolingPage2";
+import ToolingPage from "./ToolingPage";
 import FATCPage from "./FATCPage";
 import OptionsPage from "./OptionsPage";
 import TotalPage from "./TotalPage";
 import EndPricePage from "./EndPricePage";
 import { ChakraProvider } from "@chakra-ui/react";
-import ArmsPage from "./ArmsPage";
+import ArmsPage from "./ToolingPage";
 import DesignPage from "./DesignPage";
 import CRobotArm from "../classes/RobotArm";
+import Arms from "../components/Arms";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
-
 
   const [m_aRobotArm, setm_aRobotArm] = useState([]);
   const [artists, setArtists] = useState([]);
@@ -82,33 +82,22 @@ const Home = () => {
   }
 
   function AddRobotArm() {
-    
     //setm_aRobotArms
-    
     // let vRobotArm:CRobotArm[]  = m_aRobotArms;
-
     // let c: CRobotArm = new CRobotArm;
     // c.description = "test";
     // c.qty = 1;
     // vRobotArm.push(c);
-
     // alert("t");
     // setm_aRobotArms([...m_aRobotArms, vRobotArm])
-
-
-
     //set_array([...array, new_array]);
     //setm_aRobotArms(m_aRobotArms => [...m_aRobotArms, newValue])
-    
-   
     // setArtists( // Replace the state
     //   [ // with a new array
     //     ...artists, // that contains all the old items
     //     {  name: "name" } // and one new item at the end
     //   ]
     // );
-
-
   }
 
   function RenderPage() {
@@ -129,16 +118,16 @@ const Home = () => {
             ProjectDesc={setm_strProjectDesc}
             ProjectDescValue={m_strProjectDesc}
           ></InfoPage>
-          <ToolingPage
-            m_aRobotArm={m_aRobotArm}
-            setm_aRobotArms={setm_aRobotArm}           
-          ></ToolingPage>
         </>
       );
     else if (m_nPage == 2)
       return (
         <>
           <DesignPage></DesignPage>
+          <Arms
+            m_aRobotArm={m_aRobotArm}
+            setm_aRobotArms={setm_aRobotArm}
+          ></Arms>
         </>
       );
     else if (m_nPage == 3)
@@ -230,33 +219,17 @@ const Home = () => {
 
   function Debug() {
     return (
-      <div>m_aRobotArms: <pre>{JSON.stringify(m_aRobotArm)}</pre>
+      <div>
+        page: {m_nPage}
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        {m_nPage}
-        <br></br>
-        {m_strArm}
-        <br></br>
-        {m_nArmQty}
-        <br></br>
-        {m_strPositioner}
-        <br></br>
-        {m_nPositionerQty}
-        <br></br>
-        {m_strBrand}
-        <br></br>
-        {m_strDesc}
-        <br></br>
-        {m_nWelderQty}
-        <br></br>
-        {m_strTrainingValue}
-        <br></br>
-        {m_strIntegrationValue}
-        <br></br>
-        {m_strProgrammingValue}
-        <br></br>
+        
+        <pre>
+          First{JSON.stringify(m_strFirstName)} Last
+          {JSON.stringify(m_strLastName)} Company{JSON.stringify(m_strCompany)}{" "}
+           Quote#{JSON.stringify(m_strQuoteN)} Project_Desc
+          {JSON.stringify(m_strProjectDesc)}
+        </pre>
+        <pre>m_aRobotArms: {JSON.stringify(m_aRobotArm)}</pre>
       </div>
     );
   }
