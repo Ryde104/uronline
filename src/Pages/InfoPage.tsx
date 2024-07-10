@@ -12,7 +12,7 @@ const getCurrentDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-const One = (props: any) => {
+const InfoPage = (props: any) => {
   const [currentDate, setCurrentDate] = useState<string>("");
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const One = (props: any) => {
         width="50"
         ml={2}
         type="date"
-        value={currentDate}
+        value={currentDate || props.DateValue}
         onChange={(e) => setCurrentDate(e.target.value)}
       />
       <Input
@@ -68,4 +68,4 @@ const One = (props: any) => {
   );
 };
 
-export default One;
+export default InfoPage;
