@@ -1,30 +1,26 @@
 import react, { useState } from "react";
 import "../App.css";
 
-import Banner from "../components/banner";
+import Banner from "../components/Banner";
 
 import InfoPage from "./InfoPage";
 import HomePage from "./HomePage";
-import PositionersPage from "./PositionersPage";
+
 import WeldersPage from "./WeldersPage";
-import TrainingPage from "./TrainingPage";
-import IntegrationPage from "./IntegrationPage";
-import ProgrammingPage from "./ProgrammingPage";
-import ToolingPage from "./ToolingPage";
-import FATCPage from "./FATCPage";
-import OptionsPage from "./OptionsPage";
+
 import TotalPage from "./TotalPage";
-import EndPricePage from "./EndPricePage";
+
 import { ChakraProvider } from "@chakra-ui/react";
-import ArmsPage from "./ToolingPage";
+
 import DesignPage from "./DesignPage";
-import CRobotArm from "../classes/RobotArm";
+
 import Arms from "../components/Arms";
+import Positioners from "../components/Positioners";
+import Welders from "../components/Welders";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
 
-  const [m_aRobotArm, setm_aRobotArm] = useState([]);
   const [artists, setArtists] = useState([]);
 
   //Company info page
@@ -34,6 +30,11 @@ const Home = () => {
   const [m_strQuoteN, setm_strQuoteN] = useState("");
   //date?
   const [m_strProjectDesc, setm_strProjectDesc] = useState("");
+
+  //Design page
+  const [m_aRobotArm, setm_aRobotArm] = useState([]);
+  const [m_aPositioner, setm_aPositioner] = useState([]);
+  const [m_aWelder, setm_aWelder] = useState([]);
 
   const [m_strArm, setm_strArm] = useState("");
   const [m_nArmQty, setm_nArmQty] = useState(0);
@@ -128,6 +129,11 @@ const Home = () => {
             m_aRobotArm={m_aRobotArm}
             setm_aRobotArms={setm_aRobotArm}
           ></Arms>
+          <Positioners
+            m_aPositioner={m_aPositioner}
+            setm_aPositioner={setm_aPositioner}
+          ></Positioners>
+          <Welders m_aWelder={m_aWelder} setm_aWelder={setm_aWelder}></Welders>
         </>
       );
     else if (m_nPage == 3)
@@ -141,80 +147,42 @@ const Home = () => {
           WelderValue={m_nWelderQty}
         ></WeldersPage>
       );
-    else if (m_nPage == 4)
-      return (
-        <TrainingPage
-          Training={setm_strTraining}
-          TrainingPrice={setm_nTrainingPrice}
-          TrainingValue={m_strTrainingValue}
-          TrainingPriceValue={m_nTrainingPriceValue}
-        ></TrainingPage>
-      );
-    else if (m_nPage == 5)
-      return (
-        <IntegrationPage
-          Integration={setm_strIntegration}
-          IntegrationPrice={setm_nIntegrationPrice}
-          IntegrationValue={m_strIntegrationValue}
-          IntegrationPriceValue={m_nIntegrationPriceValue}
-        ></IntegrationPage>
-      );
-    else if (m_nPage == 6)
-      return (
-        <ProgrammingPage
-          Programming={setm_strProgramming}
-          ProgrammingPrice={setm_nProgrammingPrice}
-          ProgrammingValue={m_strProgrammingValue}
-          ProgrammingPriceValue={m_nProgrammingPriceValue}
-        ></ProgrammingPage>
-      );
+    else if (m_nPage == 4) return <></>;
+    else if (m_nPage == 5) return <></>;
+    else if (m_nPage == 6) return <></>;
     else if (m_nPage == 7) return <></>;
-    else if (m_nPage == 8)
-      return (
-        <FATCPage
-          FATC={setm_strFATC}
-          FATCPrice={setm_nFATCPrice}
-          FATCValue={m_strFATCValue}
-          FATCPriceValue={m_nFATCPriceValue}
-        ></FATCPage>
-      );
-    else if (m_nPage == 9)
-      return (
-        <OptionsPage
-          Options1={setm_strOptions}
-          OptionsPrice={setm_nOptionsPrice}
-          Options1Value={m_strOptions}
-          OptionsPriceValue={m_nOptionsPrice}
-        ></OptionsPage>
-      );
+    else if (m_nPage == 8) return <></>;
+    else if (m_nPage == 9) return <></>;
     else if (m_nPage == 10)
       return (
-        <TotalPage
-          Arm={m_strArm}
-          ArmPrice={m_nArmQty}
-          Positioners={m_strPositioner}
-          PositionerPrice={m_nPositionerQty}
-          Brand={m_strBrand}
-          Desc={m_strDesc}
-          WelderPrice={m_nWelderQty}
-          //
-          Training={m_strTrainingValue}
-          TrainingPrice={m_nTrainingPriceValue}
-          //
-          Integration={m_strIntegrationValue}
-          IntegrationPrice={m_nIntegrationPriceValue}
-          //
-          Programming={m_strProgrammingValue}
-          ProgrammingPrice={m_nProgrammingPriceValue}
-          //
-          Tooling={m_strToolingValue}
-          ToolingPrice={m_nToolingPriceValue}
-          //
-          FATC={m_strFATCValue}
-          FATCPrice={m_nFATCPriceValue}
-        ></TotalPage>
+        <>
+          <TotalPage
+            Arm={m_strArm}
+            ArmPrice={m_nArmQty}
+            Positioners={m_strPositioner}
+            PositionerPrice={m_nPositionerQty}
+            Brand={m_strBrand}
+            Desc={m_strDesc}
+            WelderPrice={m_nWelderQty}
+            //
+            Training={m_strTrainingValue}
+            TrainingPrice={m_nTrainingPriceValue}
+            //
+            Integration={m_strIntegrationValue}
+            IntegrationPrice={m_nIntegrationPriceValue}
+            //
+            Programming={m_strProgrammingValue}
+            ProgrammingPrice={m_nProgrammingPriceValue}
+            //
+            Tooling={m_strToolingValue}
+            ToolingPrice={m_nToolingPriceValue}
+            //
+            FATC={m_strFATCValue}
+            FATCPrice={m_nFATCPriceValue}
+          ></TotalPage>
+        </>
       );
-    else if (m_nPage == 11) return <EndPricePage></EndPricePage>;
+    else if (m_nPage == 11) return <></>;
   }
 
   function Debug() {
@@ -222,14 +190,15 @@ const Home = () => {
       <div>
         page: {m_nPage}
         <br></br>
-        
         <pre>
           First{JSON.stringify(m_strFirstName)} Last
           {JSON.stringify(m_strLastName)} Company{JSON.stringify(m_strCompany)}{" "}
-           Quote#{JSON.stringify(m_strQuoteN)} Project_Desc
+          Quote#{JSON.stringify(m_strQuoteN)} Project_Desc
           {JSON.stringify(m_strProjectDesc)}
         </pre>
-        <pre>m_aRobotArms: {JSON.stringify(m_aRobotArm)}</pre>
+        <pre>RobotArms: {JSON.stringify(m_aRobotArm)}</pre>
+        <pre>Positioners: {JSON.stringify(m_aPositioner)}</pre>
+        <pre>Welder: {JSON.stringify(m_aWelder)}</pre>
       </div>
     );
   }

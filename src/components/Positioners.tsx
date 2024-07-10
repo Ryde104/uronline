@@ -12,62 +12,62 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import CRobotArm from "../classes/CRobotArm";
+import CPositioner from "../classes/CPositioner";
 import { profile } from "console";
 
 interface InputGroupProps {
   //Initialize
-  arm: string;
+  positioner: string;
   quantity: string;
   price: string;
 }
 
 interface ProgrammingProps {
-  m_aRobotArm: CRobotArm[];
-  setm_aRobotArms: any;
+  m_aPositioner: CPositioner[];
+  setm_aPositioner: any;
 }
 
-const Arms: React.FC<ProgrammingProps> = (props) => {
+const Positioner: React.FC<ProgrammingProps> = (props) => {
   const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
     //set variables
-    { arm: "", quantity: "", price: "" },
+    { positioner: "", quantity: "", price: "" },
   ]);
 
-  const RemoveRobotArm = (index: number) => {
+  const RemovePositioner = (index: number) => {
     const confirmRemove = window.confirm(
-      "Are you sure you want to remove this Arm?"
+      "Are you sure you want to remove this Positioner?"
     );
 
     if (confirmRemove) {
-      const v = [...props.m_aRobotArm];
+      const v = [...props.m_aPositioner];
       v.splice(index, 1);
-      props.setm_aRobotArms(v);
+      props.setm_aPositioner(v);
     }
   };
 
-  const AddRobotArm = () => {
-    let cRobotArm: CRobotArm = new CRobotArm();
-    cRobotArm.description = "";
-    cRobotArm.qty = 0;
-    props.setm_aRobotArms([...props.m_aRobotArm, cRobotArm]);
+  const AddPositioner = () => {
+    let cPositioner: CPositioner = new CPositioner();
+    cPositioner.description = "";
+    cPositioner.qty = 0;
+    props.setm_aPositioner([...props.m_aPositioner, cPositioner]);
   };
 
-  const RobotArmSelection = (index: number, description: string) => {
-    const v = [...props.m_aRobotArm];
+  const PositionerSelection = (index: number, description: string) => {
+    const v = [...props.m_aPositioner];
     v[index].description = description;
-    props.setm_aRobotArms(v);
+    props.setm_aPositioner(v);
   };
 
-  const AddRobotArmQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aRobotArm];
+  const AddPositionerChange = (index: number, value: string) => {
+    const v = [...props.m_aPositioner];
     v[index].qty = Number(value);
-    props.setm_aRobotArms(v);
+    props.setm_aPositioner(v);
   };
 
-  const AddRobotArmPriceChange = (index: number, value: string) => {
-    const v = [...props.m_aRobotArm];
+  const AddPositionerPriceChange = (index: number, value: string) => {
+    const v = [...props.m_aPositioner];
     v[index].price = Number(value);
-    props.setm_aRobotArms(v);
+    props.setm_aPositioner(v);
   };
 
   function getPosition(elementToFind: any, arrayElements: string | any[]) {
@@ -82,18 +82,18 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
 
   return (
     <ChakraProvider resetCSS>
-      <Heading mt={2}>Robot Arms</Heading>
+      <Heading mt={2}>Positioners</Heading>
 
-      {props.m_aRobotArm.map((v) => (
+      {props.m_aPositioner.map((v) => (
         <InputGroup key={0} mb={2}>
-          <InputLeftAddon>Custom Arms</InputLeftAddon>
+          <InputLeftAddon>Custom Positioners</InputLeftAddon>
           <Input
             variant="outline"
             size="md"
             value={v.description}
             onChange={(e) =>
-              RobotArmSelection(
-                getPosition(v, props.m_aRobotArm),
+              PositionerSelection(
+                getPosition(v, props.m_aPositioner),
                 e.target.value
               )
             }
@@ -104,8 +104,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
             width="100px"
             value={v.qty}
             onChange={(e) =>
-              AddRobotArmQtyChange(
-                getPosition(v, props.m_aRobotArm),
+              AddPositionerChange(
+                getPosition(v, props.m_aPositioner),
                 e.target.value
               )
             }
@@ -115,8 +115,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
             width="100px"
             value={v.price}
             onChange={(e) =>
-              AddRobotArmPriceChange(
-                getPosition(v, props.m_aRobotArm),
+              AddPositionerPriceChange(
+                getPosition(v, props.m_aPositioner),
                 e.target.value
               )
             }
@@ -125,7 +125,9 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
           <Button
             ml={2}
             colorScheme="red"
-            onClick={() => RemoveRobotArm(getPosition(v, props.m_aRobotArm))}
+            onClick={() =>
+              RemovePositioner(getPosition(v, props.m_aPositioner))
+            }
           >
             Remove
           </Button>
@@ -133,7 +135,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
       ))}
 
       <Button
-        onClick={() => AddRobotArm()}
+        onClick={() => AddPositioner()}
         colorScheme="teal"
         width="50px"
         mb={2}
@@ -147,4 +149,4 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
   );
 };
 
-export default Arms;
+export default Positioner;

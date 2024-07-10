@@ -1,6 +1,6 @@
 import react from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Banner from "../components/banner";
+import Banner from "../components/Banner";
 import { ChakraProvider, Heading, Input } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 

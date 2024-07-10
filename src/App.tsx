@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Banner from "./components/banner";
+import Banner from "./components/Banner";
 import Quotes from "./components/quotes";
 import { useState } from "react";
 // import style from "./text";

@@ -12,62 +12,62 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import CRobotArm from "../classes/CRobotArm";
+import CWelder from "../classes/CWelder";
 import { profile } from "console";
 
 interface InputGroupProps {
   //Initialize
-  arm: string;
+  welder: string;
   quantity: string;
   price: string;
 }
 
 interface ProgrammingProps {
-  m_aRobotArm: CRobotArm[];
-  setm_aRobotArms: any;
+  m_aWelder: CWelder[];
+  setm_aWelder: any;
 }
 
-const Arms: React.FC<ProgrammingProps> = (props) => {
+const Welders: React.FC<ProgrammingProps> = (props) => {
   const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
     //set variables
-    { arm: "", quantity: "", price: "" },
+    { welder: "", quantity: "", price: "" },
   ]);
 
-  const RemoveRobotArm = (index: number) => {
+  const RemoveWelder = (index: number) => {
     const confirmRemove = window.confirm(
-      "Are you sure you want to remove this Arm?"
+      "Are you sure you want to remove this Welder?"
     );
 
     if (confirmRemove) {
-      const v = [...props.m_aRobotArm];
+      const v = [...props.m_aWelder];
       v.splice(index, 1);
-      props.setm_aRobotArms(v);
+      props.setm_aWelder(v);
     }
   };
 
-  const AddRobotArm = () => {
-    let cRobotArm: CRobotArm = new CRobotArm();
-    cRobotArm.description = "";
-    cRobotArm.qty = 0;
-    props.setm_aRobotArms([...props.m_aRobotArm, cRobotArm]);
+  const AddWelder = () => {
+    let cWelder: CWelder = new CWelder();
+    cWelder.description = "";
+    cWelder.qty = 0;
+    props.setm_aWelder([...props.m_aWelder, cWelder]);
   };
 
-  const RobotArmSelection = (index: number, description: string) => {
-    const v = [...props.m_aRobotArm];
+  const WelderSelection = (index: number, description: string) => {
+    const v = [...props.m_aWelder];
     v[index].description = description;
-    props.setm_aRobotArms(v);
+    props.setm_aWelder(v);
   };
 
-  const AddRobotArmQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aRobotArm];
+  const AddWelderQtyChange = (index: number, value: string) => {
+    const v = [...props.m_aWelder];
     v[index].qty = Number(value);
-    props.setm_aRobotArms(v);
+    props.setm_aWelder(v);
   };
 
-  const AddRobotArmPriceChange = (index: number, value: string) => {
-    const v = [...props.m_aRobotArm];
+  const AddWelderPriceChange = (index: number, value: string) => {
+    const v = [...props.m_aWelder];
     v[index].price = Number(value);
-    props.setm_aRobotArms(v);
+    props.setm_aWelder(v);
   };
 
   function getPosition(elementToFind: any, arrayElements: string | any[]) {
@@ -82,20 +82,17 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
 
   return (
     <ChakraProvider resetCSS>
-      <Heading mt={2}>Robot Arms</Heading>
+      <Heading mt={2}>Welders</Heading>
 
-      {props.m_aRobotArm.map((v) => (
+      {props.m_aWelder.map((v) => (
         <InputGroup key={0} mb={2}>
-          <InputLeftAddon>Custom Arms</InputLeftAddon>
+          <InputLeftAddon>Custom Welders</InputLeftAddon>
           <Input
             variant="outline"
             size="md"
             value={v.description}
             onChange={(e) =>
-              RobotArmSelection(
-                getPosition(v, props.m_aRobotArm),
-                e.target.value
-              )
+              WelderSelection(getPosition(v, props.m_aWelder), e.target.value)
             }
           ></Input>
           <InputLeftAddon>Quantity</InputLeftAddon>
@@ -104,8 +101,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
             width="100px"
             value={v.qty}
             onChange={(e) =>
-              AddRobotArmQtyChange(
-                getPosition(v, props.m_aRobotArm),
+              AddWelderQtyChange(
+                getPosition(v, props.m_aWelder),
                 e.target.value
               )
             }
@@ -115,8 +112,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
             width="100px"
             value={v.price}
             onChange={(e) =>
-              AddRobotArmPriceChange(
-                getPosition(v, props.m_aRobotArm),
+              AddWelderPriceChange(
+                getPosition(v, props.m_aWelder),
                 e.target.value
               )
             }
@@ -125,7 +122,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
           <Button
             ml={2}
             colorScheme="red"
-            onClick={() => RemoveRobotArm(getPosition(v, props.m_aRobotArm))}
+            onClick={() => RemoveWelder(getPosition(v, props.m_aWelder))}
           >
             Remove
           </Button>
@@ -133,7 +130,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
       ))}
 
       <Button
-        onClick={() => AddRobotArm()}
+        onClick={() => AddWelder()}
         colorScheme="teal"
         width="50px"
         mb={2}
@@ -147,4 +144,4 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
   );
 };
 
-export default Arms;
+export default Welders;
