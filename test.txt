@@ -1,0 +1,41 @@
+{RenderPage()}
+        <button
+          onClick={() => Backward()}
+          className="btn btn-danger btn-lg  col-2 mt-2 mb-2"
+        >
+          Back
+        </button>
+        <button
+          onClick={() => Forward()}
+          className="btn btn-primary btn-lg col-2 mt-2 mx-2 mb-2"
+        >
+          Next
+        </button>
+
+
+ <>
+          {/* <TotalPage
+            Arm={m_strArm}
+            ArmPrice={m_nArmQty}
+            Positioners={m_strPositioner}
+            PositionerPrice={m_nPositionerQty}
+            Brand={m_strBrand}
+            Desc={m_strDesc}
+            WelderPrice={m_nWelderQty}
+            //
+            Training={m_strTrainingValue}
+            TrainingPrice={m_nTrainingPriceValue}
+            //
+            Integration={m_strIntegrationValue}
+            IntegrationPrice={m_nIntegrationPriceValue}
+            //
+            Programming={m_strProgrammingValue}
+            ProgrammingPrice={m_nProgrammingPriceValue}
+            //
+            Tooling={m_strToolingValue}
+            ToolingPrice={m_nToolingPriceValue}
+            //
+            FATC={m_strFATCValue}
+            FATCPrice={m_nFATCPriceValue}
+          ></TotalPage> */}
+        </>

@@ -1,7 +1,7 @@
 import react from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Banner from "../components/Banner";
-import { ChakraProvider, Heading, Input } from "@chakra-ui/react";
+import { ChakraProvider, Divider, Heading, Input } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 
 const getCurrentDate = () => {
@@ -60,10 +60,11 @@ const InfoPage = (props: any) => {
         onChange={(e) => setCurrentDate(e.target.value)}
       />
       <Input
-        placeholder="Project Description"
-        value={props.ProjectDescValue}
-        onChange={(e) => props.ProjectDesc(e.target.value)}
+        placeholder="Project Title"
+        value={props.ProjectTitleValue}
+        onChange={(e) => props.ProjectTitle(e.target.value)}
       />
+      <Divider borderColor="black" />
     </ChakraProvider>
   );
 };

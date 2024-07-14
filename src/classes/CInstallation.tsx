@@ -1,4 +1,4 @@
-class CWelder {
+class CInstallation {
   qty: number;
   price: number;
   description: string;
@@ -10,4 +10,4 @@ class CWelder {
   }
 }
 
-export default CWelder;
+export default CInstallation;
