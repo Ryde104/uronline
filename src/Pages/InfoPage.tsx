@@ -1,8 +1,16 @@
 import react from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Banner from "../components/Banner";
-import { ChakraProvider, Divider, Heading, Input } from "@chakra-ui/react";
+import {
+  Button,
+  ChakraProvider,
+  Divider,
+  Heading,
+  Input,
+  InputGroup,
+} from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const getCurrentDate = () => {
   const today = new Date();
@@ -19,9 +27,35 @@ const InfoPage = (props: any) => {
     setCurrentDate(getCurrentDate());
   }, []);
 
+  const autoFill = () => {
+    axios
+      .get("http://127.0.0.1:5000/GetCompanyInfo?quotenumber=207")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <ChakraProvider resetCSS>
       <Heading mb={2}>Company Information</Heading>
+      <InputGroup>
+        <Input
+          placeholder="Quote Number"
+          value={props.QuoteNValue}
+          onChange={(e) => props.QuoteN(e.target.value)}
+        />
+        <Button
+          onClick={autoFill}
+          variant="solid"
+          size="md"
+          colorScheme="whatsapp"
+        >
+          Auto Complete
+        </Button>
+      </InputGroup>
       <Input
         placeholder="First Name"
         mt={2}
@@ -44,12 +78,13 @@ const InfoPage = (props: any) => {
         value={props.CompanyValue}
         onChange={(e) => props.Company(e.target.value)}
       />
+
       <Input
-        placeholder="Quote Number"
+        placeholder="Project Title"
         width="50"
         ml={2}
-        value={props.QuoteNValue}
-        onChange={(e) => props.QuoteN(e.target.value)}
+        value={props.ProjectTitleValue}
+        onChange={(e) => props.ProjectTitle(e.target.value)}
       />
       <Input
         placeholder="Date"
@@ -58,11 +93,6 @@ const InfoPage = (props: any) => {
         type="date"
         value={currentDate || props.DateValue}
         onChange={(e) => setCurrentDate(e.target.value)}
-      />
-      <Input
-        placeholder="Project Title"
-        value={props.ProjectTitleValue}
-        onChange={(e) => props.ProjectTitle(e.target.value)}
       />
       <Divider borderColor="black" />
     </ChakraProvider>

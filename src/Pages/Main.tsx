@@ -86,23 +86,26 @@ const Home = () => {
           ></Arms>
           <Positioners
             m_aPositioner={m_aPositioner}
-            setm_aPositioner={m_aPositioner}
+            setm_aPositioner={setm_aPositioner}
           ></Positioners>
-          <Welders m_aWelder={m_aWelder} setm_aWelder={m_aWelder}></Welders>
+          <Welders m_aWelder={m_aWelder} setm_aWelder={setm_aWelder}></Welders>
         </>
       );
     else if (m_nPage == 3)
       return (
         <>
           <Options></Options>
-          <Tooling m_aTooling={m_aTooling} setm_aTooling={m_aTooling}></Tooling>
+          <Tooling
+            m_aTooling={m_aTooling}
+            setm_aTooling={setm_aTooling}
+          ></Tooling>
           <Training
             m_aTraining={m_aTraining}
-            setm_aTraining={m_aTraining}
+            setm_aTraining={setm_aTraining}
           ></Training>
           <Installation
             m_aInstallation={m_aInstallation}
-            setm_aInstallation={m_aInstallation}
+            setm_aInstallation={setm_aInstallation}
           ></Installation>
         </>
       );
