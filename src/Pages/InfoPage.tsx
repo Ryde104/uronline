@@ -1,4 +1,4 @@
-import react from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Banner from "../components/Banner";
 import {
@@ -8,8 +8,8 @@ import {
   Heading,
   Input,
   InputGroup,
+  Text,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const getCurrentDate = () => {
@@ -21,7 +21,10 @@ const getCurrentDate = () => {
 };
 
 const InfoPage = (props: any) => {
+  const [quoteNumber, setQuoteNumber] = useState("");
   const [currentDate, setCurrentDate] = useState<string>("");
+  const [data, setData] = useState<any>(null); 
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentDate(getCurrentDate());
@@ -29,33 +32,38 @@ const InfoPage = (props: any) => {
 
   const autoFill = () => {
     axios
-      .get("http://127.0.0.1:5000/GetCompanyInfo?quotenumber=207")
+      .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
-        console.log(response);
+        
+        setData(response.data);
+        setError(null);
       })
       .catch((err) => {
-        console.log(err);
+        
+        setError("Failed to fetch data");
       });
   };
 
   return (
     <ChakraProvider resetCSS>
       <Heading mb={2}>Company Information</Heading>
-      <InputGroup>
+      <InputGroup mb={0}>
         <Input
           placeholder="Quote Number"
-          value={props.QuoteNValue}
-          onChange={(e) => props.QuoteN(e.target.value)}
+          value={quoteNumber}
+          onChange={(e) => setQuoteNumber(e.target.value)}
         />
         <Button
           onClick={autoFill}
           variant="solid"
           size="md"
           colorScheme="whatsapp"
+          mx={2}
         >
           Auto Complete
         </Button>
       </InputGroup>
+
       <Input
         placeholder="First Name"
         mt={2}
@@ -78,7 +86,6 @@ const InfoPage = (props: any) => {
         value={props.CompanyValue}
         onChange={(e) => props.Company(e.target.value)}
       />
-
       <Input
         placeholder="Project Title"
         width="50"
@@ -95,6 +102,17 @@ const InfoPage = (props: any) => {
         onChange={(e) => setCurrentDate(e.target.value)}
       />
       <Divider borderColor="black" />
+
+      {error && <Text color="red.500">Error: {error}</Text>}
+      {data && (
+        <div>
+          <Heading size="md" mt={4}>
+            Fetched Data:
+          </Heading>
+
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
     </ChakraProvider>
   );
 };
