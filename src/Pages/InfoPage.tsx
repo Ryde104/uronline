@@ -35,6 +35,10 @@ const InfoPage = (props: any) => {
       .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
         
+
+
+        props.FirstName(response.data.FirstName);
+
         setData(response.data);
         setError(null);
       })
