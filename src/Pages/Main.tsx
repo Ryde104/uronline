@@ -1,6 +1,6 @@
 import react, { useState } from "react";
 import "../App.css";
-import Banner from "../components/Banner";
+//import Banner from "../components/Banner";
 import InfoPage from "./InfoPage";
 import HomePage from "./HomePage";
 import { Button, ChakraProvider } from "@chakra-ui/react";
@@ -17,6 +17,9 @@ import FinalPage from "./FinalPage";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import TotalPage from "../components/Total";
 import Total from "../components/Total";
+import Banner from "../components/Banner";
+import axios from "axios";
+//import Banner from "../components/Banner";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -43,6 +46,26 @@ const Home = () => {
   const [m_strProjectDesc, setm_strProjectDesc] = useState("");
 
   // const [artists, setArtists] = useState([]);
+
+  function Create() {
+
+
+    axios.post('http://127.0.0.1:5000/Create', {
+      firstName: m_strFirstName,
+      lastName: 'Flintstone'
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
+
+
+
+  }
 
   function Backward() {
     if (m_nPage == 0) return;
@@ -122,7 +145,7 @@ const Home = () => {
       return (
         <>
           <FinalPage></FinalPage>
-          <Total></Total>
+          <Total CreateButton={Create}></Total>
         </>
       );
     else if (m_nPage == 6) return;

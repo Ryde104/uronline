@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 
+
 const TotalPage = (props: any) => {
   return (
     <>
@@ -74,6 +75,7 @@ const TotalPage = (props: any) => {
           colorScheme="whatsapp"
           display="flex"
           rightIcon={<CheckIcon />}
+          onClick={() => props.CreateButton()}
         >
           Create
         </Button>

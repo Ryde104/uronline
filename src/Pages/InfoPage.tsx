@@ -31,8 +31,12 @@ const InfoPage = (props: any) => {
   }, []);
 
   const autoFill = () => {
+
+
+
+    
     axios
-      .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
+      .get(`http://52.224.86.102:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
         
 
@@ -43,7 +47,7 @@ const InfoPage = (props: any) => {
         setError(null);
       })
       .catch((err) => {
-        
+        alert(err);
         setError("Failed to fetch data");
       });
   };
