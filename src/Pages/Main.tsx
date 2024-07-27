@@ -19,6 +19,7 @@ import TotalPage from "../components/Total";
 import Total from "../components/Total";
 import Banner from "../components/Banner";
 import axios from "axios";
+import CRobotArm from "../classes/CRobotArm";
 //import Banner from "../components/Banner";
 
 const Home = () => {
@@ -47,13 +48,20 @@ const Home = () => {
 
   // const [artists, setArtists] = useState([]);
 
+ 
+  function GetArm(v:CRobotArm)
+  {
+    return '{"description":"'+v.description+'", "qty":'+v.qty+',"price":'+v.price+'}';
+  }
+  
   function Create() {
 
+    let strJSON = '{"robotarms":[';
+    strJSON += m_aRobotArm.map(v => GetArm(v))
+    strJSON += ']}';
 
-    axios.post('http://127.0.0.1:5000/Create', {
-      firstName: m_strFirstName,
-      lastName: 'Flintstone'
-    })
+    //alert(strJSON);
+    axios.post('http://127.0.0.1:5000/Create', JSON.parse(strJSON))
     .then(function (response) {
       console.log(response);
     })
