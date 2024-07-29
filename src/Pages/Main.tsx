@@ -48,31 +48,41 @@ const Home = () => {
 
   // const [artists, setArtists] = useState([]);
 
- 
-  function GetArm(v:CRobotArm)
-  {
-    return '{"description":"'+v.description+'", "qty":'+v.qty+',"price":'+v.price+'}';
+  function GetArm(v: CRobotArm) {
+    return (
+      '{"description":"' +
+      v.description +
+      '", "qty":' +
+      v.qty +
+      ',"price":' +
+      v.price +
+      "}"
+    );
   }
-  
-  function Create() {
 
+  function Create() {
     let strJSON = '{"robotarms":[';
-    strJSON += m_aRobotArm.map(v => GetArm(v))
-    strJSON += ']}';
+    strJSON += m_aRobotArm.map((v) => GetArm(v));
+    strJSON += "]}";
 
     //alert(strJSON);
-    axios.post('http://127.0.0.1:5000/Create', JSON.parse(strJSON))
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-
-
-
-
+    axios
+      .post(
+        "http://127.0.0.1:5000/Create",
+        {
+          firstName: m_strFirstName,
+          date: m_strDate,
+          company: m_strCompany,
+          dealTitle: m_strProjectTitle,
+        },
+        JSON.parse(strJSON)
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   function Backward() {

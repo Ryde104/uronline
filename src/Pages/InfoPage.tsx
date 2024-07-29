@@ -23,7 +23,7 @@ const getCurrentDate = () => {
 const InfoPage = (props: any) => {
   const [quoteNumber, setQuoteNumber] = useState("");
   const [currentDate, setCurrentDate] = useState<string>("");
-  const [data, setData] = useState<any>(null); 
+  const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,17 +31,13 @@ const InfoPage = (props: any) => {
   }, []);
 
   const autoFill = () => {
-
-
-
-    
     axios
-      .get(`http://52.224.86.102:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
+      .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
-        
-
-
-        props.FirstName(response.data.FirstName);
+        props.FirstName(response.data.person_name);
+        props.Company(response.data.org_name);
+        props.ProjectTitle(response.data.title);
+        props.Date(response.data.add_time);
 
         setData(response.data);
         setError(null);
@@ -80,13 +76,13 @@ const InfoPage = (props: any) => {
         value={props.FirstNameValue}
         onChange={(e) => props.FirstName(e.target.value)}
       />
-      <Input
+      {/* <Input
         placeholder="Last Name"
         width="50"
         ml={2}
         value={props.LastNameValue}
         onChange={(e) => props.LastName(e.target.value)}
-      />
+      /> */}
       <Input
         placeholder="Company"
         width="50"
@@ -104,10 +100,14 @@ const InfoPage = (props: any) => {
       <Input
         placeholder="Date"
         width="50"
+        type="text"
+        maxLength={10}
         ml={2}
-        type="date"
-        value={currentDate || props.DateValue}
-        onChange={(e) => setCurrentDate(e.target.value)}
+        // type="date"
+        // value={currentDate || props.DateValue}
+        // onChange={(e) => setCurrentDate(e.target.value)}
+        value={props.DateValue}
+        onChange={(e) => props.Date(e.target.value)}
       />
       <Divider borderColor="black" />
 
