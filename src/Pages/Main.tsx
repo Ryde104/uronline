@@ -61,7 +61,9 @@ const Home = () => {
   }
 
   function Create() {
-    let strJSON = '{"robotarms":[';
+
+    //Build the json object like below:
+    let strJSON = '{"firstName":"'+m_strFirstName+'", "date":"'+m_strDate+'",  "company":"'+m_strCompany+'","dealTitle":"'+m_strProjectTitle+'", "robotarms":[';
     strJSON += m_aRobotArm.map((v) => GetArm(v));
     strJSON += "]}";
 
@@ -69,12 +71,7 @@ const Home = () => {
     axios
       .post(
         "http://127.0.0.1:5000/Create",
-        {
-          firstName: m_strFirstName,
-          date: m_strDate,
-          company: m_strCompany,
-          dealTitle: m_strProjectTitle,
-        },
+    
         JSON.parse(strJSON)
       )
       .then(function (response) {
