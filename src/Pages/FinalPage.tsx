@@ -14,7 +14,7 @@ const Final = (props: any) => {
   return (
     <>
       <ChakraProvider resetCSS>
-        <Heading mb={2}>End</Heading>
+        <Heading mb={2}>Total</Heading>
         <Heading as="h3" size="md" mb={6}></Heading>
 
         <Divider borderColor="black" />

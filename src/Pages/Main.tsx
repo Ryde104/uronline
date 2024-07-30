@@ -20,6 +20,7 @@ import Total from "../components/Total";
 import Banner from "../components/Banner";
 import axios from "axios";
 import CRobotArm from "../classes/CRobotArm";
+import CPositioner from "../classes/CPositioner";
 //import Banner from "../components/Banner";
 
 const Home = () => {
@@ -60,18 +61,44 @@ const Home = () => {
     );
   }
 
-  function Create() {
+  function GetPos(v: CPositioner) {
+    return (
+      '{"description":"' +
+      v.description +
+      '", "qty":' +
+      v.qty +
+      ',"price":' +
+      v.price +
+      "}"
+    );
+  }
 
+  function Create() {
     //Build the json object like below:
-    let strJSON = '{"firstName":"'+m_strFirstName+'", "date":"'+m_strDate+'",  "company":"'+m_strCompany+'","dealTitle":"'+m_strProjectTitle+'", "robotarms":[';
-    strJSON += m_aRobotArm.map((v) => GetArm(v));
+    let strJSON =
+
+    
+      '{"firstName":"' +
+      m_strFirstName +
+      '", "date":"' +
+      m_strDate +
+      '",  "company":"' +
+      m_strCompany +
+      '","dealTitle":"' +
+      m_strProjectTitle +
+      '", "quote":"' +
+      m_strQuoteN +
+      '","desc":"' +
+      m_strProjectDesc +
+      '", "robotarms":[';
+    strJSON += m_aRobotArm.map((v) => GetArm(v)); 
     strJSON += "]}";
 
     //alert(strJSON);
     axios
       .post(
         "http://127.0.0.1:5000/Create",
-    
+
         JSON.parse(strJSON)
       )
       .then(function (response) {
@@ -105,12 +132,13 @@ const Home = () => {
             LastNameValue={m_strLastName}
             Company={setm_strCompany}
             CompanyValue={m_strCompany}
-            QuoteN={setm_strQuoteN}
-            QuoteNValue={m_strQuoteN}
+            // QuoteN={setm_strQuoteN}
+            // QuoteNValue={m_strQuoteN}
             Date={setm_strDate}
             DateValue={m_strDate}
             ProjectTitle={setm_strProjectTitle}
             ProjectTitleValue={m_strProjectTitle}
+            // QuoteN{quoteNumber}
           ></InfoPage>
         </>
       );
@@ -217,7 +245,7 @@ const Home = () => {
           </Button>
         )}
 
-        {Debug()}
+        {/* {Debug()} */}
       </div>
     </ChakraProvider>
   );

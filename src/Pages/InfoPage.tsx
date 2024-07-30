@@ -34,6 +34,7 @@ const InfoPage = (props: any) => {
     axios
       .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
+        // props.QuoteN(response.data.id);
         props.FirstName(response.data.person_name);
         props.Company(response.data.org_name);
         props.ProjectTitle(response.data.title);
@@ -67,7 +68,14 @@ const InfoPage = (props: any) => {
           Auto Complete
         </Button>
       </InputGroup>
-
+      {/* <Input
+        placeholder="Quote"
+        mt={2}
+        mb={2}
+        width="50"
+        value={props.QuoteNValue || quoteNumber}
+        onChange={(e) => props.QuoteN(e.target.value)}
+      /> */}
       <Input
         placeholder="First Name"
         mt={2}
