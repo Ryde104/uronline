@@ -4,23 +4,14 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Select,
   Button,
-  Box,
-  Flex,
-  InputRightAddon,
   Divider,
+  Checkbox,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CTraining from "../classes/CTraining";
-import { profile } from "console";
 
-interface InputGroupProps {
-  //Initialize
-  training: string;
-  quantity: string;
-  price: string;
-}
+
 
 interface ProgrammingProps {
   m_aTraining: CTraining[];
@@ -28,14 +19,16 @@ interface ProgrammingProps {
 }
 
 const Training: React.FC<ProgrammingProps> = (props) => {
-  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
-    //set variables
-    { training: "", quantity: "", price: "" },
-  ]);
+  const [isChecked, setIsChecked] = useState(props.m_aTraining.length > 0);
+
+  useEffect(() => {
+    
+    setIsChecked(props.m_aTraining.length > 0);
+  }, [props.m_aTraining]);
 
   const RemoveTraining = (index: number) => {
     const confirmRemove = window.confirm(
-      "Are you sure you want to remove this Arm?"
+      "Are you sure you want to remove this training item?"
     );
 
     if (confirmRemove) {
@@ -52,96 +45,54 @@ const Training: React.FC<ProgrammingProps> = (props) => {
     props.setm_aTraining([...props.m_aTraining, cTraining]);
   };
 
-  const Trainingelection = (index: number, description: string) => {
-    const v = [...props.m_aTraining];
-    v[index].description = description;
-    props.setm_aTraining(v);
-  };
-
-  const AddTrainingQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aTraining];
-    v[index].qty = Number(value);
-    props.setm_aTraining(v);
-  };
-
+  
   const AddTrainingPriceChange = (index: number, value: string) => {
     const v = [...props.m_aTraining];
     v[index].price = Number(value);
     props.setm_aTraining(v);
   };
 
-  function getPosition(elementToFind: any, arrayElements: string | any[]) {
-    var i;
-    for (i = 0; i < arrayElements.length; i += 1) {
-      if (arrayElements[i] === elementToFind) {
-        return i;
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (checked) {
+      AddTraining();
+    } else {
+      // Remove the last training item or handle as needed
+      if (props.m_aTraining.length > 0) {
+        RemoveTraining(props.m_aTraining.length - 1);
       }
     }
-    return 0; //not found
-  }
+  };
 
   return (
     <ChakraProvider resetCSS>
-      <Heading mt={2}>Training</Heading>
+      <InputGroup>
+        <Heading>Training</Heading>
+        <Checkbox
+          size="lg"
+          ml={2}
+          isChecked={isChecked}
+          onChange={handleCheckboxChange}
+        />
+      </InputGroup>
 
-      {props.m_aTraining.map((v) => (
-        <InputGroup key={0} mb={2}>
-          <InputLeftAddon>Training</InputLeftAddon>
-          <Input
-            variant="outline"
-            size="md"
-            value={v.description}
-            onChange={(e) =>
-              Trainingelection(
-                getPosition(v, props.m_aTraining),
-                e.target.value
-              )
-            }
-          ></Input>
-          <InputLeftAddon>Quantity</InputLeftAddon>
-
-          <Input
-            width="100px"
-            value={v.qty}
-            onChange={(e) =>
-              AddTrainingQtyChange(
-                getPosition(v, props.m_aTraining),
-                e.target.value
-              )
-            }
-          />
+      {props.m_aTraining.map((v, index) => (
+        <InputGroup key={index} mb={2}>
+          
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
             width="100px"
             value={v.price}
             onChange={(e) =>
-              AddTrainingPriceChange(
-                getPosition(v, props.m_aTraining),
-                e.target.value
-              )
+              AddTrainingPriceChange(index, e.target.value)
             }
           />
-
-          <Button
-            ml={2}
-            colorScheme="red"
-            onClick={() => RemoveTraining(getPosition(v, props.m_aTraining))}
-          >
-            Remove
-          </Button>
+         
         </InputGroup>
       ))}
 
-      <Button
-        onClick={() => AddTraining()}
-        colorScheme="teal"
-        width="50px"
-        mb={2}
-        mt={2}
-      >
-        Add
-      </Button>
-
+      
       <Divider borderColor="black" />
     </ChakraProvider>
   );

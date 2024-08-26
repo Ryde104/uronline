@@ -21,7 +21,7 @@ const getCurrentDate = () => {
 };
 
 const InfoPage = (props: any) => {
-  const [quoteNumber, setQuoteNumber] = useState("");
+  const [quoteNumber, setQuoteNumber] = useState(props.QuoteNValue || "");
   const [currentDate, setCurrentDate] = useState<string>("");
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,11 +30,14 @@ const InfoPage = (props: any) => {
     setCurrentDate(getCurrentDate());
   }, []);
 
+  useEffect(() => {
+    setQuoteNumber(props.QuoteNValue || "");
+  }, [props.QuoteNValue]);
+
   const autoFill = () => {
     axios
       .get(`http://127.0.0.1:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
-        // props.QuoteN(response.data.id);
         props.FirstName(response.data.person_name);
         props.Company(response.data.org_name);
         props.ProjectTitle(response.data.title);
@@ -56,7 +59,10 @@ const InfoPage = (props: any) => {
         <Input
           placeholder="Quote Number"
           value={quoteNumber}
-          onChange={(e) => setQuoteNumber(e.target.value)}
+          onChange={(e) => {
+            setQuoteNumber(e.target.value);
+            props.QuoteN(e.target.value); // Update parent component
+          }}
         />
         <Button
           onClick={autoFill}
@@ -68,14 +74,6 @@ const InfoPage = (props: any) => {
           Auto Complete
         </Button>
       </InputGroup>
-      {/* <Input
-        placeholder="Quote"
-        mt={2}
-        mb={2}
-        width="50"
-        value={props.QuoteNValue || quoteNumber}
-        onChange={(e) => props.QuoteN(e.target.value)}
-      /> */}
       <Input
         placeholder="First Name"
         mt={2}
@@ -84,13 +82,6 @@ const InfoPage = (props: any) => {
         value={props.FirstNameValue}
         onChange={(e) => props.FirstName(e.target.value)}
       />
-      {/* <Input
-        placeholder="Last Name"
-        width="50"
-        ml={2}
-        value={props.LastNameValue}
-        onChange={(e) => props.LastName(e.target.value)}
-      /> */}
       <Input
         placeholder="Company"
         width="50"
@@ -111,9 +102,6 @@ const InfoPage = (props: any) => {
         type="text"
         maxLength={10}
         ml={2}
-        // type="date"
-        // value={currentDate || props.DateValue}
-        // onChange={(e) => setCurrentDate(e.target.value)}
         value={props.DateValue}
         onChange={(e) => props.Date(e.target.value)}
       />
@@ -123,10 +111,11 @@ const InfoPage = (props: any) => {
       {data && (
         <div>
           <Heading size="md" mt={4}>
-            Fetched Data:
+            
           </Heading>
+          
+          {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
 
-          <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
     </ChakraProvider>

@@ -49,7 +49,7 @@ const Home = () => {
 
   // const [artists, setArtists] = useState([]);
 
-  function GetArm(v: CRobotArm) {
+  function GetArms(v: CRobotArm) {
     return (
       '{"description":"' +
       v.description +
@@ -61,7 +61,7 @@ const Home = () => {
     );
   }
 
-  function GetPos(v: CPositioner) {
+  function GetPositioners(v: CPositioner) {
     return (
       '{"description":"' +
       v.description +
@@ -72,27 +72,53 @@ const Home = () => {
       "}"
     );
   }
+
+  function GetWelders(v: CPositioner) {
+    return (
+      '{"description":"' +
+      v.description +
+      '", "qty":' +
+      v.qty +
+      ',"price":' +
+      v.price +
+      "}"
+    );
+  }
+
+  
 
   function Create() {
-    //Build the json object like below:
+    // Build the JSON object like below:
     let strJSON =
-
-    
       '{"firstName":"' +
       m_strFirstName +
+
+      '", "dealTitle":"' +
+      m_strProjectTitle +
+
       '", "date":"' +
       m_strDate +
-      '",  "company":"' +
+
+      '", "company":"' +
       m_strCompany +
-      '","dealTitle":"' +
-      m_strProjectTitle +
+
       '", "quote":"' +
       m_strQuoteN +
-      '","desc":"' +
+
+      '", "desc":"' +
       m_strProjectDesc +
-      '", "robotarms":[';
-    strJSON += m_aRobotArm.map((v) => GetArm(v)); 
-    strJSON += "]}";
+
+      '", "robotarms":[' +
+      m_aRobotArm.map((v) => GetArms(v)).join(',') +
+
+      '], "positioners":[' +
+      m_aPositioner.map((v) => GetPositioners(v)).join(',') +
+      
+
+      '], "welders":[' +
+      m_aWelder.map((v) => GetWelders(v)).join(',') +
+      ']}';
+  
 
     //alert(strJSON);
     axios
@@ -132,8 +158,8 @@ const Home = () => {
             LastNameValue={m_strLastName}
             Company={setm_strCompany}
             CompanyValue={m_strCompany}
-            // QuoteN={setm_strQuoteN}
-            // QuoteNValue={m_strQuoteN}
+            QuoteN={setm_strQuoteN}
+            QuoteNValue={m_strQuoteN}
             Date={setm_strDate}
             DateValue={m_strDate}
             ProjectTitle={setm_strProjectTitle}
