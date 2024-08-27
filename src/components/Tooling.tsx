@@ -52,7 +52,7 @@ const Tooling: React.FC<ProgrammingProps> = (props) => {
     props.setm_aTooling([...props.m_aTooling, cTooling]);
   };
 
-  const Toolingelection = (index: number, description: string) => {
+  const Toolingselection = (index: number, description: string) => {
     const v = [...props.m_aTooling];
     v[index].description = description;
     props.setm_aTooling(v);
@@ -92,7 +92,7 @@ const Tooling: React.FC<ProgrammingProps> = (props) => {
             size="md"
             value={v.description}
             onChange={(e) =>
-              Toolingelection(getPosition(v, props.m_aTooling), e.target.value)
+              Toolingselection(getPosition(v, props.m_aTooling), e.target.value)
             }
           ></Input>
           <InputLeftAddon>Quantity</InputLeftAddon>
