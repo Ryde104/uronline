@@ -4,19 +4,13 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Select,
   Button,
-  Box,
-  Flex,
-  InputRightAddon,
   Divider,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import CRobotArm from "../classes/CRobotArm";
-import { profile } from "console";
 
 interface InputGroupProps {
-  //Initialize
   arm: string;
   quantity: string;
   price: string;
@@ -28,11 +22,6 @@ interface ProgrammingProps {
 }
 
 const Arms: React.FC<ProgrammingProps> = (props) => {
-  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
-    //set variables
-    { arm: "", quantity: "", price: "" },
-  ]);
-
   const RemoveRobotArm = (index: number) => {
     const confirmRemove = window.confirm(
       "Are you sure you want to remove this Arm?"
@@ -48,7 +37,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
   const AddRobotArm = () => {
     let cRobotArm: CRobotArm = new CRobotArm();
     cRobotArm.description = "";
-    cRobotArm.qty = 0;
+    cRobotArm.qty = 1;
+    cRobotArm.price = ""; // Ensure price starts empty
     props.setm_aRobotArms([...props.m_aRobotArm, cRobotArm]);
   };
 
@@ -66,7 +56,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
 
   const AddRobotArmPriceChange = (index: number, value: string) => {
     const v = [...props.m_aRobotArm];
-    v[index].price = Number(value);
+    v[index].price = value; // Store price as string
     props.setm_aRobotArms(v);
   };
 
@@ -77,15 +67,15 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
         return i;
       }
     }
-    return 0; //not found
+    return 0; // not found
   }
 
   return (
     <ChakraProvider resetCSS>
       <Heading mt={2}>Robot Arms</Heading>
 
-      {props.m_aRobotArm.map((v) => (
-        <InputGroup key={0} mb={2}>
+      {props.m_aRobotArm.map((v, index) => (
+        <InputGroup key={index} mb={2}>
           <InputLeftAddon>Custom Arms</InputLeftAddon>
           <Input
             variant="outline"
@@ -97,9 +87,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
                 e.target.value
               )
             }
-          ></Input>
+          />
           <InputLeftAddon>Quantity</InputLeftAddon>
-
           <Input
             width="100px"
             value={v.qty}
@@ -112,7 +101,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
           />
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-            width="100px"
+            type="number"
             value={v.price}
             onChange={(e) =>
               AddRobotArmPriceChange(
@@ -120,6 +109,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
                 e.target.value
               )
             }
+            width={`${Math.max(100, (v.price.length + 6) * 15)}px`} // Adjust width based on length of the price value
+            minWidth="100px" // Set a minimum width
           />
 
           <Button

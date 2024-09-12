@@ -4,19 +4,13 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Select,
   Button,
-  Box,
-  Flex,
-  InputRightAddon,
   Divider,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import CWelder from "../classes/CWelder";
-import { profile } from "console";
+import React from "react";
+import CWelder from "../classes/CWelder"; // Adapted to CWelder
 
 interface InputGroupProps {
-  //Initialize
   welder: string;
   quantity: string;
   price: string;
@@ -24,15 +18,10 @@ interface InputGroupProps {
 
 interface ProgrammingProps {
   m_aWelder: CWelder[];
-  setm_aWelder: any;
+  setm_aWelders: any;
 }
 
 const Welders: React.FC<ProgrammingProps> = (props) => {
-  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
-    //set variables
-    { welder: "", quantity: "", price: "" },
-  ]);
-
   const RemoveWelder = (index: number) => {
     const confirmRemove = window.confirm(
       "Are you sure you want to remove this Welder?"
@@ -41,33 +30,34 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
     if (confirmRemove) {
       const v = [...props.m_aWelder];
       v.splice(index, 1);
-      props.setm_aWelder(v);
+      props.setm_aWelders(v);
     }
   };
 
   const AddWelder = () => {
     let cWelder: CWelder = new CWelder();
     cWelder.description = "";
-    cWelder.qty = 0;
-    props.setm_aWelder([...props.m_aWelder, cWelder]);
+    cWelder.qty = 1;
+    cWelder.price = ""; // Ensure price starts empty
+    props.setm_aWelders([...props.m_aWelder, cWelder]);
   };
 
   const WelderSelection = (index: number, description: string) => {
     const v = [...props.m_aWelder];
     v[index].description = description;
-    props.setm_aWelder(v);
+    props.setm_aWelders(v);
   };
 
   const AddWelderQtyChange = (index: number, value: string) => {
     const v = [...props.m_aWelder];
     v[index].qty = Number(value);
-    props.setm_aWelder(v);
+    props.setm_aWelders(v);
   };
 
   const AddWelderPriceChange = (index: number, value: string) => {
     const v = [...props.m_aWelder];
-    v[index].price = Number(value);
-    props.setm_aWelder(v);
+    v[index].price = value; // Store price as string
+    props.setm_aWelders(v);
   };
 
   function getPosition(elementToFind: any, arrayElements: string | any[]) {
@@ -77,26 +67,28 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
         return i;
       }
     }
-    return 0; //not found
+    return 0; // not found
   }
 
   return (
     <ChakraProvider resetCSS>
       <Heading mt={2}>Welders</Heading>
 
-      {props.m_aWelder.map((v) => (
-        <InputGroup key={0} mb={2}>
+      {props.m_aWelder.map((v, index) => (
+        <InputGroup key={index} mb={2}>
           <InputLeftAddon>Custom Welders</InputLeftAddon>
           <Input
             variant="outline"
             size="md"
             value={v.description}
             onChange={(e) =>
-              WelderSelection(getPosition(v, props.m_aWelder), e.target.value)
+              WelderSelection(
+                getPosition(v, props.m_aWelder),
+                e.target.value
+              )
             }
-          ></Input>
+          />
           <InputLeftAddon>Quantity</InputLeftAddon>
-
           <Input
             width="100px"
             value={v.qty}
@@ -109,7 +101,7 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
           />
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-            width="100px"
+            type="number"
             value={v.price}
             onChange={(e) =>
               AddWelderPriceChange(
@@ -117,6 +109,8 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
                 e.target.value
               )
             }
+            width={`${Math.max(100, (v.price.length + 6) * 15)}px`} // Adjust width based on length of the price value
+            minWidth="100px" // Set a minimum width
           />
 
           <Button

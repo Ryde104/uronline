@@ -1,13 +1,5 @@
-class CPositioner {
-  qty: number;
-  price: number;
-  description: string;
-
-  constructor() {
-    this.description = "";
-    this.qty = 0;
-    this.price = 0;
-  }
+export default class CPositioner {
+  description: string = "";
+  qty: number = 1; // Changed to string for consistency with the UI control
+  price: string = ""; // Changed to string for better control in UI
 }
-
-export default CPositioner;

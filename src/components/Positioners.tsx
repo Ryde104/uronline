@@ -4,35 +4,24 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Select,
   Button,
-  Box,
-  Flex,
-  InputRightAddon,
   Divider,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import CPositioner from "../classes/CPositioner";
-import { profile } from "console";
 
 interface InputGroupProps {
-  //Initialize
-  positioner: string;
+  description: string;
   quantity: string;
   price: string;
 }
 
 interface ProgrammingProps {
   m_aPositioner: CPositioner[];
-  setm_aPositioner: any;
+  setm_aPositioners: any;
 }
 
-const Positioner: React.FC<ProgrammingProps> = (props) => {
-  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
-    //set variables
-    { positioner: "", quantity: "", price: "" },
-  ]);
-
+const Positioners: React.FC<ProgrammingProps> = (props) => {
   const RemovePositioner = (index: number) => {
     const confirmRemove = window.confirm(
       "Are you sure you want to remove this Positioner?"
@@ -41,7 +30,7 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
     if (confirmRemove) {
       const v = [...props.m_aPositioner];
       v.splice(index, 1);
-      props.setm_aPositioner(v);
+      props.setm_aPositioners(v);
     }
   };
 
@@ -49,25 +38,26 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
     let cPositioner: CPositioner = new CPositioner();
     cPositioner.description = "";
     cPositioner.qty = 0;
-    props.setm_aPositioner([...props.m_aPositioner, cPositioner]);
+    cPositioner.price = ""; // Ensure price starts empty
+    props.setm_aPositioners([...props.m_aPositioner, cPositioner]);
   };
 
   const PositionerSelection = (index: number, description: string) => {
     const v = [...props.m_aPositioner];
     v[index].description = description;
-    props.setm_aPositioner(v);
+    props.setm_aPositioners(v);
   };
 
-  const AddPositionerChange = (index: number, value: string) => {
+  const AddPositionerQtyChange = (index: number, value: string) => {
     const v = [...props.m_aPositioner];
     v[index].qty = Number(value);
-    props.setm_aPositioner(v);
+    props.setm_aPositioners(v);
   };
 
   const AddPositionerPriceChange = (index: number, value: string) => {
     const v = [...props.m_aPositioner];
-    v[index].price = Number(value);
-    props.setm_aPositioner(v);
+    v[index].price = value; // Store price as string
+    props.setm_aPositioners(v);
   };
 
   function getPosition(elementToFind: any, arrayElements: string | any[]) {
@@ -77,16 +67,16 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
         return i;
       }
     }
-    return 0; //not found
+    return 0; // not found
   }
 
   return (
     <ChakraProvider resetCSS>
       <Heading mt={2}>Positioners</Heading>
 
-      {props.m_aPositioner.map((v) => (
-        <InputGroup key={0} mb={2}>
-          <InputLeftAddon>Custom Positioners</InputLeftAddon>
+      {props.m_aPositioner.map((v, index) => (
+        <InputGroup key={index} mb={2}>
+          <InputLeftAddon>Description</InputLeftAddon>
           <Input
             variant="outline"
             size="md"
@@ -97,14 +87,13 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
                 e.target.value
               )
             }
-          ></Input>
+          />
           <InputLeftAddon>Quantity</InputLeftAddon>
-
           <Input
             width="100px"
             value={v.qty}
             onChange={(e) =>
-              AddPositionerChange(
+              AddPositionerQtyChange(
                 getPosition(v, props.m_aPositioner),
                 e.target.value
               )
@@ -112,7 +101,7 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
           />
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-            width="100px"
+            type="number"
             value={v.price}
             onChange={(e) =>
               AddPositionerPriceChange(
@@ -120,14 +109,14 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
                 e.target.value
               )
             }
+            width={`${Math.max(100, (v.price.length + 6) * 15)}px`} // Adjust width based on length of the price value
+            minWidth="100px" // Set a minimum width
           />
 
           <Button
             ml={2}
             colorScheme="red"
-            onClick={() =>
-              RemovePositioner(getPosition(v, props.m_aPositioner))
-            }
+            onClick={() => RemovePositioner(getPosition(v, props.m_aPositioner))}
           >
             Remove
           </Button>
@@ -149,4 +138,4 @@ const Positioner: React.FC<ProgrammingProps> = (props) => {
   );
 };
 
-export default Positioner;
+export default Positioners;

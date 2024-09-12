@@ -1,26 +1,6 @@
-import {
-  Heading,
-  ChakraProvider,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Select,
-  Button,
-  Box,
-  Flex,
-  InputRightAddon,
-  Divider,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Heading, ChakraProvider, Input, InputGroup, InputLeftAddon, Divider, Checkbox } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 import CTooling from "../classes/CTooling";
-import { profile } from "console";
-
-interface InputGroupProps {
-  //Initialize
-  tooling: string;
-  quantity: string;
-  price: string;
-}
 
 interface ProgrammingProps {
   m_aTooling: CTooling[];
@@ -28,16 +8,14 @@ interface ProgrammingProps {
 }
 
 const Tooling: React.FC<ProgrammingProps> = (props) => {
-  const [inputGroups, setInputGroups] = useState<InputGroupProps[]>([
-    //set variables
-    { tooling: "", quantity: "", price: "" },
-  ]);
+  const [isChecked, setIsChecked] = useState(props.m_aTooling.length > 0);
+
+  useEffect(() => {
+    setIsChecked(props.m_aTooling.length > 0);
+  }, [props.m_aTooling]);
 
   const RemoveTooling = (index: number) => {
-    const confirmRemove = window.confirm(
-      "Are you sure you want to remove this Arm?"
-    );
-
+    const confirmRemove = window.confirm("Are you sure you want to remove this Tooling item?");
     if (confirmRemove) {
       const v = [...props.m_aTooling];
       v.splice(index, 1);
@@ -47,97 +25,48 @@ const Tooling: React.FC<ProgrammingProps> = (props) => {
 
   const AddTooling = () => {
     let cTooling: CTooling = new CTooling();
-    cTooling.description = "";
-    cTooling.qty = 0;
     props.setm_aTooling([...props.m_aTooling, cTooling]);
-  };
-
-  const Toolingselection = (index: number, description: string) => {
-    const v = [...props.m_aTooling];
-    v[index].description = description;
-    props.setm_aTooling(v);
-  };
-
-  const AddToolingQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aTooling];
-    v[index].qty = Number(value);
-    props.setm_aTooling(v);
   };
 
   const AddToolingPriceChange = (index: number, value: string) => {
     const v = [...props.m_aTooling];
-    v[index].price = Number(value);
-    props.setm_aTooling(v);
+    // Prevent non-numeric characters, allow empty input to reset to 0
+    if (value === '' || !isNaN(Number(value))) {
+      v[index].price = value === '' ? 0 : Number(value); // Always store a number
+      props.setm_aTooling(v);
+    }
   };
 
-  function getPosition(elementToFind: any, arrayElements: string | any[]) {
-    var i;
-    for (i = 0; i < arrayElements.length; i += 1) {
-      if (arrayElements[i] === elementToFind) {
-        return i;
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (checked) {
+      AddTooling();
+    } else {
+      if (props.m_aTooling.length > 0) {
+        RemoveTooling(props.m_aTooling.length - 1);
       }
     }
-    return 0; //not found
-  }
+  };
 
   return (
     <ChakraProvider resetCSS>
-      <Heading mt={2}>Tooling</Heading>
+      <InputGroup>
+        <Heading>Tooling</Heading>
+        <Checkbox size="lg" ml={2} isChecked={isChecked} onChange={handleCheckboxChange} />
+      </InputGroup>
 
-      {props.m_aTooling.map((v) => (
-        <InputGroup key={0} mb={2}>
-          <InputLeftAddon>Tooling</InputLeftAddon>
-          <Input
-            variant="outline"
-            size="md"
-            value={v.description}
-            onChange={(e) =>
-              Toolingselection(getPosition(v, props.m_aTooling), e.target.value)
-            }
-          ></Input>
-          <InputLeftAddon>Quantity</InputLeftAddon>
-
-          <Input
-            width="100px"
-            value={v.qty}
-            onChange={(e) =>
-              AddToolingQtyChange(
-                getPosition(v, props.m_aTooling),
-                e.target.value
-              )
-            }
-          />
+      {props.m_aTooling.map((v, index) => (
+        <InputGroup key={index} mb={2}>
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-            width="100px"
-            value={v.price}
-            onChange={(e) =>
-              AddToolingPriceChange(
-                getPosition(v, props.m_aTooling),
-                e.target.value
-              )
-            }
-          />
-
-          <Button
-            ml={2}
-            colorScheme="red"
-            onClick={() => RemoveTooling(getPosition(v, props.m_aTooling))}
-          >
-            Remove
-          </Button>
+  type="text" // Use text to allow empty input
+  width="100px"
+  value={v.price === 0 ? '' : v.price} // Display empty string for 0, otherwise show the price
+  onChange={(e) => AddToolingPriceChange(index, e.target.value)}
+/>
         </InputGroup>
       ))}
-
-      <Button
-        onClick={() => AddTooling()}
-        colorScheme="teal"
-        width="50px"
-        mb={2}
-        mt={2}
-      >
-        Add
-      </Button>
 
       <Divider borderColor="black" />
     </ChakraProvider>
