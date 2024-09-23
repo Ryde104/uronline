@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, ChakraProvider } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -7,13 +7,12 @@ import InfoPage from "./InfoPage";
 import HomePage from "./HomePage";
 import DesignPage from "./DesignPage";
 import Arms from "../components/Arms";
-
 import Options from "./ServicesPage";
 import Tooling from "../components/Tooling";
 import Training from "../components/Training";
 import Installation from "../components/Installation";
 import ExtrasPage from "./ExtrasPage";
-import Total from "../components/Total";
+import DataTable from "../components/Table";
 import Banner from "../components/Banner";
 import CRobotArm from "../classes/CRobotArm";
 import CPositioner from "../classes/CPositioner";
@@ -38,12 +37,32 @@ const Home = () => {
   const [m_aWelder, setm_aWelder] = useState<CWelder[]>([]);
 
   // Options page
-  const [m_aTooling, setm_aTooling] = useState<CTooling[]>([]);
+  const [m_aTooling, setm_aTooling] = useState<any[]>([]);
   const [m_aTraining, setm_aTraining] = useState<any[]>([]);
   const [m_aInstallation, setm_aInstallation] = useState<any[]>([]);
 
   // Extras page
   const [m_strProjectDesc, setm_strProjectDesc] = useState("");
+
+  // New state to hold the total price
+  const [m_aTotalPrice, setm_aTotalPrice] = useState(0);
+
+  // Function to calculate total price
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      const robotArmTotal = m_aRobotArm.reduce((total, arm) => total + Number(arm.price), 0);
+      const positionerTotal = m_aPositioner.reduce((total, pos) => total + Number(pos.price), 0);
+      const welderTotal = m_aWelder.reduce((total, welder) => total + Number(welder.price), 0);
+      const toolingTotal = m_aTooling.reduce((total, item) => total + Number(item.price), 0);
+      const trainingTotal = m_aTraining.reduce((total, item) => total + Number(item.price), 0);
+      const installationTotal = m_aInstallation.reduce((total, item) => total + Number(item.price), 0);
+
+      const totalPrice = robotArmTotal + positionerTotal + welderTotal + toolingTotal + trainingTotal + installationTotal;
+      setm_aTotalPrice(totalPrice);
+    };
+
+    calculateTotalPrice();
+  }, [m_aRobotArm, m_aPositioner, m_aWelder, m_aTooling, m_aTraining, m_aInstallation]);
 
   // Helper functions to get the formatted JSON for different entities
   function GetArms(v: CRobotArm) {
@@ -62,6 +81,14 @@ const Home = () => {
     return `{"price":"${v.price}"}`;
   }
 
+  function GetTraining(v: CTooling) {
+    return `{"price":"${v.price}"}`;
+  }
+
+  function GetInstallation(v: CTooling) {
+    return `{"price":"${v.price}"}`;
+  }
+
   function Create() {
     // Build the JSON object
     let strJSON = `{
@@ -71,11 +98,15 @@ const Home = () => {
       "company":"${m_strCompany}",
       "quote":"${m_strQuoteN}",
       "desc":"${m_strProjectDesc}",
+      "totalPrice": "${m_aTotalPrice.toFixed(2)}", 
       "robotarms":[${m_aRobotArm.map((v) => GetArms(v)).join(",")}],
       "positioners":[${m_aPositioner.map((v) => GetPositioners(v)).join(",")}],
       "welders":[${m_aWelder.map((v) => GetWelders(v)).join(",")}],
-      "tooling":[${m_aTooling.map((v) => GetTooling(v)).join(",")}]}`;
-
+      "tooling":[${m_aTooling.map((v) => GetTooling(v)).join(",")}],
+      "training":[${m_aTraining.map((v) => GetTraining(v)).join(",")}],
+      "installation":[${m_aInstallation.map((v) => GetInstallation(v)).join(",")}] 
+  }`;
+  
     axios
       .post("http://127.0.0.1:5000/Create", JSON.parse(strJSON))
       .then(function (response) {
@@ -100,20 +131,25 @@ const Home = () => {
     if (m_nPage === 0) return <HomePage />;
     else if (m_nPage === 1)
       return (
-        <InfoPage
-          FirstName={setm_strFirstName}
-          FirstNameValue={m_strFirstName}
-          LastName={setm_strLastName}
-          LastNameValue={m_strLastName}
-          Company={setm_strCompany}
-          CompanyValue={m_strCompany}
-          QuoteN={setm_strQuoteN}
-          QuoteNValue={m_strQuoteN}
-          Date={setm_strDate}
-          DateValue={m_strDate}
-          ProjectTitle={setm_strProjectTitle}
-          ProjectTitleValue={m_strProjectTitle}
-        />
+        <>
+          <InfoPage
+            FirstName={setm_strFirstName}
+            FirstNameValue={m_strFirstName}
+            LastName={setm_strLastName}
+            LastNameValue={m_strLastName}
+            Company={setm_strCompany}
+            CompanyValue={m_strCompany}
+            QuoteN={setm_strQuoteN}
+            QuoteNValue={m_strQuoteN}
+            Date={setm_strDate}
+            DateValue={m_strDate}
+            ProjectTitle={setm_strProjectTitle}
+            ProjectTitleValue={m_strProjectTitle}
+          />
+          <div style={{ marginTop: "20px", fontWeight: "bold" }}>
+            {/* Total Price: ${m_aTotalPrice.toFixed(2)} */}
+          </div>
+        </>
       );
     else if (m_nPage === 2)
       return (
@@ -143,7 +179,15 @@ const Home = () => {
     else if (m_nPage === 5)
       return (
         <>
-          <Total CreateButton={Create} />
+          <DataTable
+            m_aRobotArm={m_aRobotArm}
+            m_aPositioner={m_aPositioner}
+            m_aWelder={m_aWelder}
+            m_aTooling={m_aTooling}
+            m_aTraining={m_aTraining}
+            m_aInstallation={m_aInstallation}
+            CreateButton={Create}
+          />
         </>
       );
   }

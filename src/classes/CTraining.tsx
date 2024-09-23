@@ -1,13 +1,9 @@
-class CTraining {
-  qty: number;
+class CTooling {
   price: number;
-  description: string;
 
   constructor() {
-    this.description = "";
-    this.qty = 0;
-    this.price = 0;
+    this.price = 7500;
   }
 }
 
-export default CTraining;
+export default CTooling;

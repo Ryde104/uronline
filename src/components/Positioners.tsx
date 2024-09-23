@@ -37,7 +37,7 @@ const Positioners: React.FC<ProgrammingProps> = (props) => {
   const AddPositioner = () => {
     let cPositioner: CPositioner = new CPositioner();
     cPositioner.description = "";
-    cPositioner.qty = 0;
+    cPositioner.qty = 1;
     cPositioner.price = ""; // Ensure price starts empty
     props.setm_aPositioners([...props.m_aPositioner, cPositioner]);
   };
@@ -49,9 +49,11 @@ const Positioners: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddPositionerQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aPositioner];
-    v[index].qty = Number(value);
-    props.setm_aPositioners(v);
+    if (!isNaN(Number(value))) { // Prevent non-numeric input
+      const v = [...props.m_aPositioner];
+      v[index].qty = Number(value);
+      props.setm_aPositioners(v);
+    }
   };
 
   const AddPositionerPriceChange = (index: number, value: string) => {
@@ -116,7 +118,9 @@ const Positioners: React.FC<ProgrammingProps> = (props) => {
           <Button
             ml={2}
             colorScheme="red"
-            onClick={() => RemovePositioner(getPosition(v, props.m_aPositioner))}
+            onClick={() =>
+              RemovePositioner(getPosition(v, props.m_aPositioner))
+            }
           >
             Remove
           </Button>

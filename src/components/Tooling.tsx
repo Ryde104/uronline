@@ -1,13 +1,13 @@
 import { Heading, ChakraProvider, Input, InputGroup, InputLeftAddon, Divider, Checkbox } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import CTooling from "../classes/CTooling";
+import CTooling from "../classes/CTooling"; // Change this import if necessary
 
-interface ProgrammingProps {
-  m_aTooling: CTooling[];
+interface ToolingProps {
+  m_aTooling: CTooling[]; // Change the prop type to CTooling
   setm_aTooling: any;
 }
 
-const Tooling: React.FC<ProgrammingProps> = (props) => {
+const Tooling: React.FC<ToolingProps> = (props) => {
   const [isChecked, setIsChecked] = useState(props.m_aTooling.length > 0);
 
   useEffect(() => {
@@ -60,11 +60,11 @@ const Tooling: React.FC<ProgrammingProps> = (props) => {
         <InputGroup key={index} mb={2}>
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-  type="text" // Use text to allow empty input
-  width="100px"
-  value={v.price === 0 ? '' : v.price} // Display empty string for 0, otherwise show the price
-  onChange={(e) => AddToolingPriceChange(index, e.target.value)}
-/>
+            type="text" // Use text to allow empty input
+            width="100px"
+            value={v.price === 0 ? '' : v.price} // Display empty string for 0, otherwise show the price
+            onChange={(e) => AddToolingPriceChange(index, e.target.value)}
+          />
         </InputGroup>
       ))}
 

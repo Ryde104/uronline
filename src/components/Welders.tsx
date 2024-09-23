@@ -49,9 +49,11 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddWelderQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aWelder];
-    v[index].qty = Number(value);
-    props.setm_aWelders(v);
+    if (!isNaN(Number(value))) { // Prevent non-numeric input
+      const v = [...props.m_aWelder];
+      v[index].qty = Number(value);
+      props.setm_aWelders(v);
+    }
   };
 
   const AddWelderPriceChange = (index: number, value: string) => {

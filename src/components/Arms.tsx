@@ -49,9 +49,11 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddRobotArmQtyChange = (index: number, value: string) => {
-    const v = [...props.m_aRobotArm];
-    v[index].qty = Number(value);
-    props.setm_aRobotArms(v);
+    if (!isNaN(Number(value))) { // Prevent non-numeric input
+      const v = [...props.m_aRobotArm];
+      v[index].qty = Number(value);
+      props.setm_aRobotArms(v);
+    }
   };
 
   const AddRobotArmPriceChange = (index: number, value: string) => {

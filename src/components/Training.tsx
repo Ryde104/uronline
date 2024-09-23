@@ -1,17 +1,6 @@
-import {
-  Heading,
-  ChakraProvider,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Button,
-  Divider,
-  Checkbox,
-} from "@chakra-ui/react";
+import { Heading, ChakraProvider, Input, InputGroup, InputLeftAddon, Divider, Checkbox } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import CTraining from "../classes/CTraining";
-
-
 
 interface ProgrammingProps {
   m_aTraining: CTraining[];
@@ -22,15 +11,11 @@ const Training: React.FC<ProgrammingProps> = (props) => {
   const [isChecked, setIsChecked] = useState(props.m_aTraining.length > 0);
 
   useEffect(() => {
-    
     setIsChecked(props.m_aTraining.length > 0);
   }, [props.m_aTraining]);
 
   const RemoveTraining = (index: number) => {
-    const confirmRemove = window.confirm(
-      "Are you sure you want to remove this training item?"
-    );
-
+    const confirmRemove = window.confirm("Are you sure you want to remove this Training item?");
     if (confirmRemove) {
       const v = [...props.m_aTraining];
       v.splice(index, 1);
@@ -40,16 +25,16 @@ const Training: React.FC<ProgrammingProps> = (props) => {
 
   const AddTraining = () => {
     let cTraining: CTraining = new CTraining();
-    cTraining.description = "";
-    cTraining.qty = 0;
     props.setm_aTraining([...props.m_aTraining, cTraining]);
   };
 
-  
   const AddTrainingPriceChange = (index: number, value: string) => {
     const v = [...props.m_aTraining];
-    v[index].price = Number(value);
-    props.setm_aTraining(v);
+    // Prevent non-numeric characters, allow empty input to reset to 0
+    if (value === '' || !isNaN(Number(value))) {
+      v[index].price = value === '' ? 0 : Number(value); // Always store a number
+      props.setm_aTraining(v);
+    }
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +43,6 @@ const Training: React.FC<ProgrammingProps> = (props) => {
     if (checked) {
       AddTraining();
     } else {
-      // Remove the last training item or handle as needed
       if (props.m_aTraining.length > 0) {
         RemoveTraining(props.m_aTraining.length - 1);
       }
@@ -69,30 +53,21 @@ const Training: React.FC<ProgrammingProps> = (props) => {
     <ChakraProvider resetCSS>
       <InputGroup>
         <Heading>Training</Heading>
-        <Checkbox
-          size="lg"
-          ml={2}
-          isChecked={isChecked}
-          onChange={handleCheckboxChange}
-        />
+        <Checkbox size="lg" ml={2} isChecked={isChecked} onChange={handleCheckboxChange} />
       </InputGroup>
 
       {props.m_aTraining.map((v, index) => (
         <InputGroup key={index} mb={2}>
-          
           <InputLeftAddon>Price</InputLeftAddon>
           <Input
-            width="100px"
-            value={v.price}
-            onChange={(e) =>
-              AddTrainingPriceChange(index, e.target.value)
-            }
-          />
-         
+  type="text" // Use text to allow empty input
+  width="100px"
+  value={v.price === 0 ? '' : v.price} // Display empty string for 0, otherwise show the price
+  onChange={(e) => AddTrainingPriceChange(index, e.target.value)}
+/>
         </InputGroup>
       ))}
 
-      
       <Divider borderColor="black" />
     </ChakraProvider>
   );
