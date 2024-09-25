@@ -38,7 +38,7 @@ const Positioners: React.FC<ProgrammingProps> = (props) => {
     let cPositioner: CPositioner = new CPositioner();
     cPositioner.description = "";
     cPositioner.qty = 1;
-    cPositioner.price = ""; // Ensure price starts empty
+    cPositioner.price = "";
     props.setm_aPositioners([...props.m_aPositioner, cPositioner]);
   };
 
@@ -49,7 +49,8 @@ const Positioners: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddPositionerQtyChange = (index: number, value: string) => {
-    if (!isNaN(Number(value))) { // Prevent non-numeric input
+    if (!isNaN(Number(value))) {
+      // Prevent non-numeric input
       const v = [...props.m_aPositioner];
       v[index].qty = Number(value);
       props.setm_aPositioners(v);

@@ -23,7 +23,9 @@ const Quotes = (props: any) => {
   function RenderItems() {
     return m_cQuotes.quotes.map((v: CQuote) => (
       <tr key={v.name}>
-        <td><a href={v.url}>{v.name}</a></td>
+        <td>
+          <a href={v.url}>{v.name}</a>
+        </td>
         <td>{v.createdDate}</td>
       </tr>
     ));

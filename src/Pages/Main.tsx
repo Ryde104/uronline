@@ -44,27 +44,58 @@ const Home = () => {
   // Extras page
   const [m_strProjectDesc, setm_strProjectDesc] = useState("");
 
-  // New state to hold the total price
+  // Price
   const [m_aTotalPrice, setm_aTotalPrice] = useState(0);
 
   // Function to calculate total price
   useEffect(() => {
     const calculateTotalPrice = () => {
-      const robotArmTotal = m_aRobotArm.reduce((total, arm) => total + Number(arm.price), 0);
-      const positionerTotal = m_aPositioner.reduce((total, pos) => total + Number(pos.price), 0);
-      const welderTotal = m_aWelder.reduce((total, welder) => total + Number(welder.price), 0);
-      const toolingTotal = m_aTooling.reduce((total, item) => total + Number(item.price), 0);
-      const trainingTotal = m_aTraining.reduce((total, item) => total + Number(item.price), 0);
-      const installationTotal = m_aInstallation.reduce((total, item) => total + Number(item.price), 0);
+      const robotArmTotal = m_aRobotArm.reduce(
+        (total, arm) => total + Number(arm.price),
+        0
+      );
+      const positionerTotal = m_aPositioner.reduce(
+        (total, pos) => total + Number(pos.price),
+        0
+      );
+      const welderTotal = m_aWelder.reduce(
+        (total, welder) => total + Number(welder.price),
+        0
+      );
+      const toolingTotal = m_aTooling.reduce(
+        (total, item) => total + Number(item.price),
+        0
+      );
+      const trainingTotal = m_aTraining.reduce(
+        (total, item) => total + Number(item.price),
+        0
+      );
+      const installationTotal = m_aInstallation.reduce(
+        (total, item) => total + Number(item.price),
+        0
+      );
 
-      const totalPrice = robotArmTotal + positionerTotal + welderTotal + toolingTotal + trainingTotal + installationTotal;
+      const totalPrice =
+        robotArmTotal +
+        positionerTotal +
+        welderTotal +
+        toolingTotal +
+        trainingTotal +
+        installationTotal;
       setm_aTotalPrice(totalPrice);
     };
 
     calculateTotalPrice();
-  }, [m_aRobotArm, m_aPositioner, m_aWelder, m_aTooling, m_aTraining, m_aInstallation]);
+  }, [
+    m_aRobotArm,
+    m_aPositioner,
+    m_aWelder,
+    m_aTooling,
+    m_aTraining,
+    m_aInstallation,
+  ]);
 
-  // Helper functions to get the formatted JSON for different entities
+  // Helper functions to get the formatted JSON 
   function GetArms(v: CRobotArm) {
     return `{"description":"${v.description}", "qty":${v.qty},"price":"${v.price}"}`;
   }
@@ -90,7 +121,6 @@ const Home = () => {
   }
 
   function Create() {
-    // Build the JSON object
     let strJSON = `{
       "firstName":"${m_strFirstName}",
       "dealTitle":"${m_strProjectTitle}",
@@ -104,9 +134,11 @@ const Home = () => {
       "welders":[${m_aWelder.map((v) => GetWelders(v)).join(",")}],
       "tooling":[${m_aTooling.map((v) => GetTooling(v)).join(",")}],
       "training":[${m_aTraining.map((v) => GetTraining(v)).join(",")}],
-      "installation":[${m_aInstallation.map((v) => GetInstallation(v)).join(",")}] 
+      "installation":[${m_aInstallation
+        .map((v) => GetInstallation(v))
+        .join(",")}] 
   }`;
-  
+
     axios
       .post("http://127.0.0.1:5000/Create", JSON.parse(strJSON))
       .then(function (response) {
@@ -156,7 +188,10 @@ const Home = () => {
         <>
           <DesignPage />
           <Arms m_aRobotArm={m_aRobotArm} setm_aRobotArms={setm_aRobotArm} />
-          <Positioners m_aPositioner={m_aPositioner} setm_aPositioners={setm_aPositioner} />
+          <Positioners
+            m_aPositioner={m_aPositioner}
+            setm_aPositioners={setm_aPositioner}
+          />
           <Welders m_aWelder={m_aWelder} setm_aWelders={setm_aWelder} />
         </>
       );
@@ -166,7 +201,10 @@ const Home = () => {
           <Options />
           <Tooling m_aTooling={m_aTooling} setm_aTooling={setm_aTooling} />
           <Training m_aTraining={m_aTraining} setm_aTraining={setm_aTraining} />
-          <Installation m_aInstallation={m_aInstallation} setm_aInstallation={setm_aInstallation} />
+          <Installation
+            m_aInstallation={m_aInstallation}
+            setm_aInstallation={setm_aInstallation}
+          />
         </>
       );
     else if (m_nPage === 4)

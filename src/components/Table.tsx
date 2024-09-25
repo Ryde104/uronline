@@ -25,7 +25,7 @@ interface DataTableProps {
   m_aTooling: Item[];
   m_aTraining: Item[];
   m_aInstallation: Item[];
-  CreateButton: () => void; // Add this line
+  CreateButton: () => void;
 }
 
 const formatPrice = (price: string) => {
@@ -47,14 +47,40 @@ const DataTable: React.FC<DataTableProps> = ({
   m_aInstallation,
   CreateButton,
 }) => {
-  const totalPrice = [
-    ...m_aRobotArm,
-    ...m_aPositioner,
-    ...m_aWelder,
-    ...m_aTooling,
-    ...m_aTraining,
-    ...m_aInstallation,
-  ].reduce((total, item) => total + Number(item.price), 0);
+  const robotArmSubtotal = m_aRobotArm.reduce(
+    (total, arm) => total + Number(arm.price),
+    0
+  );
+  const positionerSubtotal = m_aPositioner.reduce(
+    (total, pos) => total + Number(pos.price),
+    0
+  );
+  const welderSubtotal = m_aWelder.reduce(
+    (total, welder) => total + Number(welder.price),
+    0
+  );
+
+  const toolingSubtotal = m_aTooling.reduce(
+    (total, item) => total + Number(item.price),
+    0
+  );
+  const trainingSubtotal = m_aTraining.reduce(
+    (total, item) => total + Number(item.price),
+    0
+  );
+  const installationSubtotal = m_aInstallation.reduce(
+    (total, item) => total + Number(item.price),
+    0
+  );
+
+  const toolingTrainingInstallationSubtotal =
+    toolingSubtotal + trainingSubtotal + installationSubtotal;
+
+  const totalPrice =
+    robotArmSubtotal +
+    positionerSubtotal +
+    welderSubtotal +
+    toolingTrainingInstallationSubtotal;
 
   return (
     <>
@@ -96,11 +122,9 @@ const DataTable: React.FC<DataTableProps> = ({
                 ))}
               </Td>
               <Td>
-                {formatPrice(
-                  m_aRobotArm
-                    .reduce((total, arm) => total + Number(arm.price), 0)
-                    .toString()
-                )}
+                {m_aRobotArm.map((arm) => (
+                  <div key={arm.description}>{formatPrice(arm.price)}</div>
+                ))}
               </Td>
             </Tr>
             <Tr>
@@ -118,11 +142,9 @@ const DataTable: React.FC<DataTableProps> = ({
                 ))}
               </Td>
               <Td>
-                {formatPrice(
-                  m_aPositioner
-                    .reduce((total, pos) => total + Number(pos.price), 0)
-                    .toString()
-                )}
+                {m_aPositioner.map((pos) => (
+                  <div key={pos.description}>{formatPrice(pos.price)}</div>
+                ))}
               </Td>
             </Tr>
             <Tr>
@@ -140,68 +162,91 @@ const DataTable: React.FC<DataTableProps> = ({
                 ))}
               </Td>
               <Td>
-                {formatPrice(
-                  m_aWelder
-                    .reduce((total, welder) => total + Number(welder.price), 0)
-                    .toString()
-                )}
+                {m_aWelder.map((welder) => (
+                  <div key={welder.description}>{formatPrice(welder.price)}</div>
+                ))}
+              </Td>
+            </Tr>
+            <Tr>
+              <Th colSpan={3} textAlign="right">
+                <strong>Subtotal for Equipment:</strong>
+              </Th>
+              <Td textAlign="right">
+                <strong>
+                  {formatPrice(
+                    (robotArmSubtotal + positionerSubtotal + welderSubtotal).toString()
+                  )}
+                </strong>
               </Td>
             </Tr>
           </Tbody>
 
-          <Thead>
+          <Tbody>
             <Tr>
-              <Th></Th>
-              <Th>
-                <strong>Check</strong>
-              </Th>
-              <Th>
-                <strong>Services</strong>
-              </Th>
-              <Th>
-                <strong>Price</strong>
+              <Th colSpan={4}>
+                <strong></strong>
               </Th>
             </Tr>
-          </Thead>
-          <Tbody>
-            {[
-              { label: "Tooling", items: m_aTooling },
-              { label: "Training", items: m_aTraining },
-              { label: "Installation", items: m_aInstallation },
-            ].map(({ label, items }) => (
-              <Tr key={label}>
-                <Th scope="row">
-                  <strong>{label}</strong>
-                </Th>
-                <Td>
-                  {items.length > 0 ? (
-                    <CheckIcon color="black" />
-                  ) : (
-                    <span>No {label}</span>
-                  )}
-                </Td>
-                <Td>
-                  {items.length > 0
-                    ? items.map((item) => item.description).join(", ")
-                    : ""}
-                </Td>
-                <Td>
-                  {formatPrice(
-                    items
-                      .reduce((total, item) => total + Number(item.price), 0)
-                      .toString()
-                  )}
-                </Td>
-              </Tr>
-            ))}
+            <Tr>
+              <Th scope="row">
+                <strong>Tooling</strong>
+              </Th>
+              <Td>
+                {m_aTooling.length > 0 ? (
+                  <CheckIcon color="black" />
+                ) : (
+                  <span>No Tooling</span>
+                )}
+              </Td>
+              <Td>{m_aTooling.map((item) => item.description).join(", ")}</Td>
+              <Td>{formatPrice(toolingSubtotal.toString())}</Td>
+            </Tr>
+            <Tr>
+              <Th scope="row">
+                <strong>Training</strong>
+              </Th>
+              <Td>
+                {m_aTraining.length > 0 ? (
+                  <CheckIcon color="black" />
+                ) : (
+                  <span>No Training</span>
+                )}
+              </Td>
+              <Td>{m_aTraining.map((item) => item.description).join(", ")}</Td>
+              <Td>{formatPrice(trainingSubtotal.toString())}</Td>
+            </Tr>
+            <Tr>
+              <Th scope="row">
+                <strong>Installation</strong>
+              </Th>
+              <Td>
+                {m_aInstallation.length > 0 ? (
+                  <CheckIcon color="black" />
+                ) : (
+                  <span>No Installation</span>
+                )}
+              </Td>
+              <Td>{m_aInstallation.map((item) => item.description).join(", ")}</Td>
+              <Td>{formatPrice(installationSubtotal.toString())}</Td>
+            </Tr>
+            <Tr>
+              <Th colSpan={3} textAlign="right">
+                <strong>Subtotal for Services:</strong>
+              </Th>
+              <Td textAlign="right">
+                <strong>
+                  {formatPrice(toolingTrainingInstallationSubtotal.toString())}
+                </strong>
+              </Td>
+            </Tr>
           </Tbody>
 
           <Tbody>
             <Tr>
-              <Th colSpan={3} style={{ textAlign: "left" }}>
+              <Th colSpan={3} textAlign="right">
                 <strong>TOTAL:</strong>
               </Th>
-              <Td>
+              <Td textAlign="right">
                 <strong>{formatPrice(totalPrice.toString())}</strong>
               </Td>
             </Tr>

@@ -38,7 +38,7 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
     let cRobotArm: CRobotArm = new CRobotArm();
     cRobotArm.description = "";
     cRobotArm.qty = 1;
-    cRobotArm.price = ""; // Ensure price starts empty
+    cRobotArm.price = "";
     props.setm_aRobotArms([...props.m_aRobotArm, cRobotArm]);
   };
 
@@ -49,7 +49,8 @@ const Arms: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddRobotArmQtyChange = (index: number, value: string) => {
-    if (!isNaN(Number(value))) { // Prevent non-numeric input
+    if (!isNaN(Number(value))) {
+      // Prevent non-numeric input
       const v = [...props.m_aRobotArm];
       v[index].qty = Number(value);
       props.setm_aRobotArms(v);

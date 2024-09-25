@@ -38,7 +38,7 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
     let cWelder: CWelder = new CWelder();
     cWelder.description = "";
     cWelder.qty = 1;
-    cWelder.price = ""; // Ensure price starts empty
+    cWelder.price = "";
     props.setm_aWelders([...props.m_aWelder, cWelder]);
   };
 
@@ -49,7 +49,8 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
   };
 
   const AddWelderQtyChange = (index: number, value: string) => {
-    if (!isNaN(Number(value))) { // Prevent non-numeric input
+    if (!isNaN(Number(value))) {
+      // Prevent non-numeric input
       const v = [...props.m_aWelder];
       v[index].qty = Number(value);
       props.setm_aWelders(v);
@@ -84,10 +85,7 @@ const Welders: React.FC<ProgrammingProps> = (props) => {
             size="md"
             value={v.description}
             onChange={(e) =>
-              WelderSelection(
-                getPosition(v, props.m_aWelder),
-                e.target.value
-              )
+              WelderSelection(getPosition(v, props.m_aWelder), e.target.value)
             }
           />
           <InputLeftAddon>Quantity</InputLeftAddon>
