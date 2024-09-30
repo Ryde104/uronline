@@ -13,7 +13,7 @@ import Training from "../components/Training";
 import Installation from "../components/Installation";
 import ExtrasPage from "./ExtrasPage";
 import DataTable from "../components/Table";
-// import Banner from "../components/Banner"
+import Banner from "../components/Banner"
 import CRobotArm from "../classes/CRobotArm";
 import CPositioner from "../classes/CPositioner";
 import CWelder from "../classes/CWelder";
@@ -234,7 +234,8 @@ const Home = () => {
     <ChakraProvider>
       <div className="container">
         <div className="col"></div>
-        {/* <Banner headerText="United Robotics Quote Generator" /> */}
+        <Banner headerText="United Robotics Quote Generator" />
+        
         {RenderPage()}
 
         {m_nPage > 0 && (

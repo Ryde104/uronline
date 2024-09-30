@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Banner from "./components/Banner";
+// import Banner from "./components/Banner";
 import Quotes from "./components/quotes";
 import { useState } from "react";
 // import style from "./text";
@@ -189,7 +189,7 @@ const App = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <Banner headerText="United Robotics Quote Generator" />
+            {/* <Banner headerText="United Robotics Quote Generator" /> */}
           </div>
         </div>
         <div className="row">
