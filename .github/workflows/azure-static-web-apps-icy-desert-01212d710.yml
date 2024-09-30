@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v4 # Update to the latest version
         with:
           node-version: '22'
+      - name: Install Dependencies
+        run: npm install
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -31,7 +33,7 @@ jobs:
           action: "upload"
           app_location: "src" # Ensure this is correct
           api_location: ""
-          output_location: ""
+          output_location: "build" # or "dist" depending on your build setup
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
