@@ -1,6 +1,6 @@
 import react from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Banner from "../components/Banner";
+
 import { ChakraProvider, Divider, Heading, Textarea } from "@chakra-ui/react";
 
 const Extras = (props: any) => {
