@@ -1,4 +1,4 @@
-import react from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Divider, Heading } from "@chakra-ui/react";

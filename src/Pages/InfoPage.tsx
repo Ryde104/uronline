@@ -22,7 +22,7 @@ const getCurrentDate = () => {
 
 const InfoPage = (props: any) => {
   const [quoteNumber, setQuoteNumber] = useState(props.QuoteNValue || "");
-  const [currentDate, setCurrentDate] = useState<string>("");
+  const [, setCurrentDate] = useState<string>("");
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 

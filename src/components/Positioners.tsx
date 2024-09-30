@@ -10,11 +10,7 @@ import {
 import React from "react";
 import CPositioner from "../classes/CPositioner";
 
-interface InputGroupProps {
-  description: string;
-  quantity: string;
-  price: string;
-}
+
 
 interface ProgrammingProps {
   m_aPositioner: CPositioner[];

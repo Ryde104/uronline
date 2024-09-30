@@ -1,7 +1,7 @@
-import react from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { ChakraProvider, Divider, Heading, Input } from "@chakra-ui/react";
+import { ChakraProvider, Heading, } from "@chakra-ui/react";
 
 const Zero = (props: any) => {
   return (

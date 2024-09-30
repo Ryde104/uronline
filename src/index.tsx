@@ -7,9 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import Main from "./Pages/Main";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

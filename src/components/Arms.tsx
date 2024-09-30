@@ -10,11 +10,7 @@ import {
 import React from "react";
 import CRobotArm from "../classes/CRobotArm";
 
-interface InputGroupProps {
-  arm: string;
-  quantity: string;
-  price: string;
-}
+
 
 interface ProgrammingProps {
   m_aRobotArm: CRobotArm[];

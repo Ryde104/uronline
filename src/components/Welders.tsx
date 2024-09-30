@@ -10,11 +10,7 @@ import {
 import React from "react";
 import CWelder from "../classes/CWelder"; // Adapted to CWelder
 
-interface InputGroupProps {
-  welder: string;
-  quantity: string;
-  price: string;
-}
+
 
 interface ProgrammingProps {
   m_aWelder: CWelder[];
