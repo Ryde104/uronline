@@ -13,12 +13,13 @@ import Training from "../components/Training";
 import Installation from "../components/Installation";
 import ExtrasPage from "./ExtrasPage";
 import DataTable from "../components/Table";
-// import Banner from "../components/Banner"
+
 import CRobotArm from "../classes/CRobotArm";
 import CPositioner from "../classes/CPositioner";
 import CWelder from "../classes/CWelder";
 import Welders from "../components/Welders";
 import Positioners from "../components/Positioners";
+import Banner from "../components/Banner";
 
 const Home = () => {
   const [m_nPage, setm_nPage] = useState(0);
@@ -179,7 +180,7 @@ const Home = () => {
             ProjectTitleValue={m_strProjectTitle}
           />
           <div style={{ marginTop: "20px", fontWeight: "bold" }}>
-            {/* Total Price: ${m_aTotalPrice.toFixed(2)} */}
+            
           </div>
         </>
       );
@@ -234,7 +235,7 @@ const Home = () => {
     <ChakraProvider>
       <div className="container">
         <div className="col"></div>
-        {/* <Banner headerText="United Robotics Quote Generator" /> */}
+        <Banner headerText="United Robotics Quote Generator" />
         
         {RenderPage()}
 
