@@ -36,7 +36,7 @@ const InfoPage = (props: any) => {
 
   const autoFill = () => {
     axios
-      .get(`http://20.241.205.131:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
+      .get(`http://4.157.70.58:5000/GetCompanyInfo?quotenumber=${quoteNumber}`)
       .then((response) => {
         props.FirstName(response.data.person_name);
         props.Company(response.data.org_name);

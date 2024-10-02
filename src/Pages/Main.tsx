@@ -141,7 +141,7 @@ const Home = () => {
   }`;
 
     axios
-      .post("http://20.241.205.131:5000/Create", JSON.parse(strJSON))
+      .post("http://4.157.70.58:5000/Create", JSON.parse(strJSON))
       .then(function (response) {
         console.log(response);
       })
