@@ -141,11 +141,7 @@ const Home = () => {
   }`;
 
     axios
-<<<<<<< HEAD
       .post("https://127.0.0.1:5000/Create", JSON.parse(strJSON))
-=======
-      .post("http://4.236.227.113:5000/Create", JSON.parse(strJSON))
->>>>>>> dfe0c448b55453592304d5b780f6b3855554a84f
       .then(function (response) {
         console.log(response);
       })
